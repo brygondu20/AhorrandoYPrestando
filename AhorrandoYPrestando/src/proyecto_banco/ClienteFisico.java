@@ -55,9 +55,6 @@ public class ClienteFisico extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
         jTextField13 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -70,7 +67,7 @@ public class ClienteFisico extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cedula:");
         panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, 20));
-        panelCurves1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 160, -1));
+        panelCurves1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 160, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -156,15 +153,6 @@ public class ClienteFisico extends javax.swing.JFrame {
         panelCurves1.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 60, -1));
         panelCurves1.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 60, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "San Jose", "Cartago", "Alajuela", "Heredia", "Guanacaste", "Puntarenas", "Limon" }));
-        panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelCurves1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, -1, -1));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelCurves1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, -1));
-
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
 
         getContentPane().add(panelNice5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
@@ -225,9 +213,6 @@ public class ClienteFisico extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

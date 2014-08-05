@@ -4,6 +4,13 @@
  */
 package proyecto_banco;
 
+import data.ClientesDAO;
+import data.CuentasDAO;
+import domain.Cliente_Cuenta;
+import domain.Cuenta;
+import domain.Cuenta_Ahorros;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Administrador
@@ -35,14 +42,14 @@ public class CuentaAhorro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JTextField();
+        txtIdCuenta = new javax.swing.JTextField();
+        txtSaldoActual = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jCBMoneda = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txtMontoDiarioMinimo = new javax.swing.JTextField();
+        txtCargoSaldoMinimo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
@@ -91,41 +98,41 @@ public class CuentaAhorro extends javax.swing.JFrame {
         jLabel7.setText("Cuenta de Ahorro");
         panelCurves1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, 20));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCedulaActionPerformed(evt);
             }
         });
-        panelCurves1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 90, -1));
-        panelCurves1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 90, -1));
+        panelCurves1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 90, -1));
+        panelCurves1.add(txtIdCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 90, -1));
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtSaldoActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtSaldoActualActionPerformed(evt);
             }
         });
-        panelCurves1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 90, -1));
+        panelCurves1.add(txtSaldoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 90, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Moneda:");
         panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, -1, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "$ Dolar", "₡ Colón" }));
-        panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 110, -1));
+        jCBMoneda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "$ Dolar", "₡ Colón" }));
+        panelCurves1.add(jCBMoneda, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 120, 110, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Monto Diario Minimo:");
         panelCurves1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, 20));
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        txtMontoDiarioMinimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                txtMontoDiarioMinimoActionPerformed(evt);
             }
         });
-        panelCurves1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 110, 20));
-        panelCurves1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 110, 20));
+        panelCurves1.add(txtMontoDiarioMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 110, 20));
+        panelCurves1.add(txtCargoSaldoMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 110, 20));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,14 +149,14 @@ public class CuentaAhorro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtSaldoActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoActualActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtSaldoActualActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtCedulaActionPerformed
 
     private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
         // TODO add your handling code here:
@@ -158,12 +165,43 @@ public class CuentaAhorro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void txtMontoDiarioMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoDiarioMinimoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_txtMontoDiarioMinimoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        try {
+            CuentasDAO cuentas= new CuentasDAO();
+            
+            Cuenta cuenta= new Cuenta();
+            cuenta.setId_cuenta(cuentas.ultimoId());
+            cuenta.setTipo_cuenta(1);
+            cuentas.agregarCuenta(cuenta);
+            
+            
+            Cuenta_Ahorros cuentaAhorros = new Cuenta_Ahorros();
+            cuentaAhorros.setMonto_min(Integer.parseInt(txtMontoDiarioMinimo.getText()));
+            if(jCBMoneda.getSelectedItem() == "$ Dolar"){
+                cuentaAhorros.setMoneda(2);
+            }else{
+                cuentaAhorros.setMoneda(1);
+            }
+            
+            cuentaAhorros.setSaldo_actual(Integer.parseInt(txtSaldoActual.getText()));
+            cuentaAhorros.setCargo_saldo_min(Integer.parseInt(txtCargoSaldoMinimo.getText()));
+            cuentas.agregarCuenta_ahorros(cuentaAhorros);
+            
+            
+            
+            ClientesDAO cliente= new ClientesDAO();
+            Cliente_Cuenta clienteCuenta= new Cliente_Cuenta();
+            int idCliente=cliente.idClienteFisico(Integer.parseInt(txtCedula.getText()));
+            clienteCuenta.setId_cliente(idCliente);
+            clienteCuenta.setId_cuenta(cuenta.getId_cuenta());
+            cliente.agregarCliente_cuenta(clienteCuenta);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
@@ -204,7 +242,7 @@ public class CuentaAhorro extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jCBMoneda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -212,12 +250,12 @@ public class CuentaAhorro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
+    private javax.swing.JTextField txtCargoSaldoMinimo;
+    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtIdCuenta;
+    private javax.swing.JTextField txtMontoDiarioMinimo;
+    private javax.swing.JTextField txtSaldoActual;
     // End of variables declaration//GEN-END:variables
 }
