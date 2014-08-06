@@ -51,6 +51,10 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
         jTextField13 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox3 = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,10 +76,10 @@ public class ClienteJuridico extends javax.swing.JFrame {
         panelCurves1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 100, -1));
 
         jButton4.setText("Actualizar");
-        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, -1, -1));
+        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, -1, -1));
 
         jButton1.setText("Agregar");
-        panelCurves1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 80, -1));
+        panelCurves1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 80, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -132,10 +136,24 @@ public class ClienteJuridico extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Telefonos:");
-        panelCurves1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, 20));
+        jLabel9.setText("Direcciones:");
+        panelCurves1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, 20));
         panelCurves1.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 60, -1));
         panelCurves1.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, 60, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "San Jose", "Cartago", "Alajuela", "Guanacaste", "Limon", "Heredia", "Puntarenas" }));
+        panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 90, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelCurves1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 100, -1));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelCurves1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 100, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Telefonos:");
+        panelCurves1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, 20));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
 
@@ -197,7 +215,11 @@ public class ClienteJuridico extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
