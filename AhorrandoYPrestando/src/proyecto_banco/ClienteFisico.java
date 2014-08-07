@@ -81,7 +81,7 @@ public class ClienteFisico extends javax.swing.JFrame {
     
     
     public void codigo() throws SQLException{
-        DireccionesDAO dir= new DireccionesDAO();
+        DireccionesDAO dir = new DireccionesDAO();
         Direcciones direccion = new Direcciones();
         direccion.setPROVINCIA((String) jComboBoxProvincias.getSelectedItem());
         direccion.setCANTON((String) jComboBoxCanton.getSelectedItem());
@@ -144,8 +144,8 @@ public class ClienteFisico extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cedula:");
         panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, -1, 20));
-        panelCurves1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 160, -1));
-        panelCurves1.add(txtApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 100, -1));
+        panelCurves1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 170, -1));
+        panelCurves1.add(txtApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 110, -1));
 
         jButton4.setText("Actualizar");
         panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, -1));
@@ -255,8 +255,8 @@ public class ClienteFisico extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Telefonos:");
         panelCurves1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, 20));
-        panelCurves1.add(txtApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 100, -1));
-        panelCurves1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 100, -1));
+        panelCurves1.add(txtApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 110, -1));
+        panelCurves1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 140, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
 
