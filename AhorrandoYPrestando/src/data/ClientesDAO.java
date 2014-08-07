@@ -39,6 +39,7 @@ public class ClientesDAO {
      public void agregarCliente_juridico(Cliente_Juridico clienteJuridico) throws SQLException{
         bd = new SQLServerDB();
         String sql="{call PA_CLIENTE_JURIDICO_INSERTAR ("+clienteJuridico.getCed_juridica()+",'"+clienteJuridico.getNombre_Empresa()+"','"
+                +",'"+clienteJuridico.getApellido1()+"','"+",'"+clienteJuridico.getApellido2()+"','"
                 +clienteJuridico.getCodDireccion()+",'"+clienteJuridico.getCod_telefono()+"')}";  
         bd.callStatement(sql);
         bd.closeExecuteQuery();
@@ -149,7 +150,7 @@ public class ClientesDAO {
      public boolean existeCliente_Fisico(Cliente_Fisico cliente_Fisico)throws SQLException{
         boolean exist = false;
         bd= new SQLServerDB();
-        String sql= "select * from cliente_Fisico where ="+cliente_Fisico.getCedula();
+        String sql= "{call PA_CONSULATAR_ID_Cliente_Fisico("+cliente_Fisico.getCedula()+")}";
         ResultSet res = bd.executeQuery(sql);
         if (res.next()){
             exist = true;
@@ -161,7 +162,7 @@ public class ClientesDAO {
      public boolean existeCliente_Juridico(Cliente_Juridico cliente_Juridico)throws SQLException{
         boolean exist = false;
         bd= new SQLServerDB();
-        String sql= "select * from cliente_Juridico where ="+cliente_Juridico.getCed_juridica();
+        String sql= "{call PA_CONSULATAR_ID_Cliente_Juridico"+cliente_Juridico.getCed_juridica()+"}";
         ResultSet res = bd.executeQuery(sql);
         if (res.next()){
             exist = true;

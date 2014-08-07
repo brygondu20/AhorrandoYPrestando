@@ -280,38 +280,58 @@ public class ClienteFisico extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         
-        ClientesBusiness clienteBusiness = new ClientesBusiness();
         
-        Cliente_Fisico clienteFisico = new Cliente_Fisico();
-        clienteFisico.setCedula(Integer.parseInt(txtCedula.getText()));
-        clienteFisico.setNombre(txtNombre.getText());
-        clienteFisico.setApellido1(txtApellido1.getText());
-        clienteFisico.setApellido2(txtApellido2.getText());
-        clienteFisico.setCodDireccion(codDirrecion);
-        clienteFisico.setCorreo(txtCorreo.getText());
         
-        int dia=jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
-        int mes=jDateChooser1.getCalendar().get(Calendar.MONTH);
-        int año=jDateChooser1.getCalendar().get(Calendar.YEAR);
-        String fecha=año+"/"+mes+"/"+dia;
-        clienteFisico.setFec_nacimiento(fecha);
-        
-        Telefonos telefonos= new Telefonos();
-        telefonos.setTelefono1(tel1.getText());
-        telefonos.setTelefono2(tel2.getText());
-        telefonos.setTelefono3(tel3.getText());
-        telefonos.setCelular1(cel1.getText());
-        telefonos.setCelular2(cel2.getText());
-        
-        clienteFisico.setCod_telefonos(telefonos.getCod_telefono());
-        
-        try {
-        
-            clienteBusiness.agregarClienteFisico(clienteFisico);
-            clienteBusiness.agregarTelefonos(telefonos);
-        
-    }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados estan incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        try {                                           
+            ClientesDAO clienteDAO = new ClientesDAO();
+            Cliente cliente= new Cliente();
+            cliente.setTipo_cliente(1);
+            try {
+                clienteDAO.agregarCliente(cliente);
+            } catch (SQLException ex) {
+                Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+            ClientesBusiness clienteBusiness = new ClientesBusiness();
+            
+            Cliente_Fisico clienteFisico = new Cliente_Fisico();
+            clienteFisico.setId_cliente(clienteDAO.ultimoID());
+            clienteFisico.setCedula(Integer.parseInt(txtCedula.getText()));
+            clienteFisico.setNombre(txtNombre.getText());
+            clienteFisico.setApellido1(txtApellido1.getText());
+            clienteFisico.setApellido2(txtApellido2.getText());
+            clienteFisico.setCodDireccion(codDirrecion);
+            clienteFisico.setCorreo(txtCorreo.getText());
+            
+            int dia=jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
+            int mes=jDateChooser1.getCalendar().get(Calendar.MONTH);
+            int año=jDateChooser1.getCalendar().get(Calendar.YEAR);
+            String fecha=año+"/"+mes+"/"+dia;
+            clienteFisico.setFec_nacimiento(fecha);
+            
+            TelefonoDAO telDAO = new TelefonoDAO();
+            Telefonos telefonos= new Telefonos();
+            telefonos.setTelefono1(tel1.getText());
+            telefonos.setTelefono2(tel2.getText());
+            telefonos.setTelefono3(tel3.getText());
+            telefonos.setCelular1(cel1.getText());
+            telefonos.setCelular2(cel2.getText());
+            telDAO.agregarTelefonos(telefonos);
+            telDAO.codigoTelefono(telefonos);
+            clienteFisico.setCod_telefonos(telefonos.getCod_telefono());
+            
+            
+            try {
+               clienteBusiness.agregarTelefonos(telefonos);
+                
+                clienteBusiness.agregarClienteFisico(clienteFisico);
+            JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido agregado correctemente ");
+        }catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(ClienteFisico.class.getName()).log( Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 

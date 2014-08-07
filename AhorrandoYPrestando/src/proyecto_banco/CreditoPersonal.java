@@ -6,6 +6,7 @@ package proyecto_banco;
 
 import data.CreditosDAO;
 import domain.Cliente_Cuenta;
+import domain.Credito_Personal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -101,6 +102,11 @@ public class CreditoPersonal extends javax.swing.JFrame {
         panelCurves1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 130, -1));
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
         panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 80, -1));
 
         btnActualizar.setText("Actualizar");
@@ -179,6 +185,26 @@ public class CreditoPersonal extends javax.swing.JFrame {
             Logger.getLogger(CreditoPersonal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_txtIdClienteActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        try {
+            CreditosDAO creditos= new CreditosDAO();
+            Credito_Personal creditoPersonal= new Credito_Personal();
+            creditoPersonal.setId_cliente(Integer.parseInt(txtIdCliente.getText()));
+            if(jCBMoneda.getSelectedItem() == "$ Dolar"){
+                    creditoPersonal.setMoneda(2);
+                }else{
+                    creditoPersonal.setMoneda(1);
+                }
+            int cuenta = (int) jComboBox1.getSelectedItem();
+            creditoPersonal.setId_cuenta(cuenta);
+            creditoPersonal.setMonto(Integer.parseInt(txtMonto.getText()));
+            creditos.agregarCredito_personal(creditoPersonal);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreditoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
      * @param args the command line arguments

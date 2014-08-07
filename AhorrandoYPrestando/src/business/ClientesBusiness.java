@@ -29,7 +29,7 @@ public class ClientesBusiness {
     
     public void agregarClienteFisico(Cliente_Fisico cliente_Fisico)throws SQLException, Exception{
         if (!(clientesDAO.existeCliente_Fisico(cliente_Fisico))){
-            cliente_Fisico.setId_cliente(clientesDAO.ultimoID());
+            
             clientesDAO.agregarCliente_fisico(cliente_Fisico);
         }else{
             throw new Exception("El cliente fisico ya existe en la base de datos");

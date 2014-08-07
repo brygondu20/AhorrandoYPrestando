@@ -7,13 +7,11 @@
 package data;
 
 import connection.SQLServerDB;
-import domain.Cliente;
 import domain.Cliente_Cuenta;
 import domain.Compra_Casa;
 import domain.Compra_Lote;
 import domain.Credito_Personal;
 import domain.Credito_Predendario;
-import domain.Direcciones;
 import domain.Hipoteca_Casa;
 import domain.Prestamo_Hipotecario;
 import domain.Vehiculo_Nuevo;
@@ -31,8 +29,8 @@ public class CreditosDAO {
      
     public void agregarCredito_personal (Credito_Personal  creditopersonal) throws SQLException{
         bd = new SQLServerDB();
-        String sql="{call    PA_CREDITO_PERSONAL_INSERTAR ("+creditopersonal.getMonto()+"','"+creditopersonal.getMoneda()+"','"+creditopersonal.getId_cliente()+",'"
-                +creditopersonal.getId_cuenta()+"')}";  
+        String sql="{call    PA_CREDITO_PERSONAL_INSERTAR ("+creditopersonal.getMonto()+","+creditopersonal.getMoneda()+","+creditopersonal.getId_cliente()+","
+                +creditopersonal.getId_cuenta()+")}";  
         bd.callStatement(sql);
         bd.closeExecuteQuery();
      }       

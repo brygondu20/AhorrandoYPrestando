@@ -5,6 +5,8 @@ public class Cliente_Juridico {
     
     private int ced_juridica;
     private String nombre_Empresa;
+    private String apellido1;
+    private String apellido2;
     private String codDireccion;
     private int cod_telefono;
     
@@ -13,10 +15,14 @@ public class Cliente_Juridico {
     public Cliente_Juridico() {
     }
 
-    public Cliente_Juridico(int ced_juridica, String nombre_Empresa, String direccion, int cod_telefono) {
+    
+
+    public Cliente_Juridico(int ced_juridica, String nombre_Empresa, String apellido1, String apellido2, String codDireccion, int cod_telefono) {
         this.ced_juridica = ced_juridica;
         this.nombre_Empresa = nombre_Empresa;
-        this.codDireccion = direccion;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.codDireccion = codDireccion;
         this.cod_telefono = cod_telefono;
     }
 
@@ -54,7 +60,22 @@ public class Cliente_Juridico {
         this.cod_telefono = cod_telefono;
     }
 
+    public String getApellido1() {
+        return apellido1;
+    }
+
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
+
+    public String getApellido2() {
+        return apellido2;
+    }
+
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
+
     
-  
     
 }
