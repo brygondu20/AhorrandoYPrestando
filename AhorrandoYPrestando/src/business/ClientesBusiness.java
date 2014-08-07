@@ -7,24 +7,29 @@
 package business;
 
 import data.ClientesDAO;
+import data.TelefonoDAO;
 import domain.Cliente_Fisico;
 import domain.Cliente_Juridico;
+import domain.Telefonos;
 import java.sql.SQLException;
 
 /**
  *
  * @author Administrador
  */
-public class ClientesBusinnes {
+public class ClientesBusiness {
 
     private ClientesDAO clientesDAO;
+    private TelefonoDAO telDAO;
     
-    public ClientesBusinnes(){
+    public ClientesBusiness(){
         this.clientesDAO = new ClientesDAO();
+        this.telDAO = new TelefonoDAO();
     }
     
     public void agregarClienteFisico(Cliente_Fisico cliente_Fisico)throws SQLException, Exception{
         if (!(clientesDAO.existeCliente_Fisico(cliente_Fisico))){
+            cliente_Fisico.setId_cliente(clientesDAO.ultimoID());
             clientesDAO.agregarCliente_fisico(cliente_Fisico);
         }else{
             throw new Exception("El cliente fisico ya existe en la base de datos");
@@ -56,4 +61,11 @@ public class ClientesBusinnes {
         }
         
     }
+    public void agregarTelefonos(Telefonos telefonos)throws SQLException, Exception{
+        telDAO.agregarTelefonos(telefonos);
+        telDAO.codigoTelefono(telefonos);
+    }
+    
+    
+   
 }

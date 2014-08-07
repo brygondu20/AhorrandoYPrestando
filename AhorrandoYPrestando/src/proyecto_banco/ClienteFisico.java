@@ -4,6 +4,7 @@
  */
 package proyecto_banco;
 
+import business.ClientesBusiness;
 import data.ClientesDAO;
 import data.DireccionesDAO;
 import data.TelefonoDAO;
@@ -106,7 +107,7 @@ public class ClienteFisico extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         txtApellido2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -147,8 +148,13 @@ public class ClienteFisico extends javax.swing.JFrame {
         panelCurves1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 170, -1));
         panelCurves1.add(txtApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 110, -1));
 
-        jButton4.setText("Actualizar");
-        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, -1));
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, -1));
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -273,16 +279,10 @@ public class ClienteFisico extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        try {
-        ClientesDAO clientes= new ClientesDAO();
         
-        Cliente cliente = new Cliente();
-        cliente.setTipo_cliente(1);
-        clientes.agregarCliente(cliente);
-        
+        ClientesBusiness clienteBusiness = new ClientesBusiness();
         
         Cliente_Fisico clienteFisico = new Cliente_Fisico();
-        clienteFisico.setId_cliente(clientes.ultimoID());
         clienteFisico.setCedula(Integer.parseInt(txtCedula.getText()));
         clienteFisico.setNombre(txtNombre.getText());
         clienteFisico.setApellido1(txtApellido1.getText());
@@ -290,28 +290,28 @@ public class ClienteFisico extends javax.swing.JFrame {
         clienteFisico.setCodDireccion(codDirrecion);
         clienteFisico.setCorreo(txtCorreo.getText());
         
-        
-        TelefonoDAO telDAO = new TelefonoDAO();
-        Telefonos telefonos= new Telefonos();
-        telefonos.setTelefono1(tel1.getText());
-        telefonos.setTelefono2(tel2.getText());
-        telefonos.setTelefono3(tel3.getText());
-        telefonos.setCelular1(cel1.getText());
-        telefonos.setCelular2(cel2.getText());
-        telDAO.agregarTelefonos(telefonos);
-        telDAO.codigoTelefono(telefonos);
-        clienteFisico.setCod_telefonos(telefonos.getCod_telefono());
-        
         int dia=jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
         int mes=jDateChooser1.getCalendar().get(Calendar.MONTH);
         int año=jDateChooser1.getCalendar().get(Calendar.YEAR);
         String fecha=año+"/"+mes+"/"+dia;
         clienteFisico.setFec_nacimiento(fecha);
         
-         
-        clientes.agregarCliente_fisico(clienteFisico);
+        Telefonos telefonos= new Telefonos();
+        telefonos.setTelefono1(tel1.getText());
+        telefonos.setTelefono2(tel2.getText());
+        telefonos.setTelefono3(tel3.getText());
+        telefonos.setCelular1(cel1.getText());
+        telefonos.setCelular2(cel2.getText());
+        
+        clienteFisico.setCod_telefonos(telefonos.getCod_telefono());
+        
+        try {
+        
+            clienteBusiness.agregarClienteFisico(clienteFisico);
+            clienteBusiness.agregarTelefonos(telefonos);
+        
     }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados estan incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -358,6 +358,43 @@ public class ClienteFisico extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_txtCedulaActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        ClientesBusiness clienteBusiness = new ClientesBusiness();
+        
+        Cliente_Fisico cliente_Fisico = new Cliente_Fisico();
+        cliente_Fisico.setCedula(Integer.parseInt(txtCedula.getText()));
+        cliente_Fisico.setNombre(txtNombre.getText());
+        cliente_Fisico.setApellido1(txtApellido1.getText());
+        cliente_Fisico.setApellido2(txtApellido2.getText());
+        cliente_Fisico.setCodDireccion(codDirrecion);
+        cliente_Fisico.setCorreo(txtCorreo.getText());
+        
+        int dia=jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
+        int mes=jDateChooser1.getCalendar().get(Calendar.MONTH);
+        int año=jDateChooser1.getCalendar().get(Calendar.YEAR);
+        String fecha=año+"/"+mes+"/"+dia;
+        cliente_Fisico.setFec_nacimiento(fecha);
+        
+        Telefonos telefonos= new Telefonos();
+        telefonos.setTelefono1(tel1.getText());
+        telefonos.setTelefono2(tel2.getText());
+        telefonos.setTelefono3(tel3.getText());
+        telefonos.setCelular1(cel1.getText());
+        telefonos.setCelular2(cel2.getText());
+        
+        cliente_Fisico.setCod_telefonos(telefonos.getCod_telefono());
+        
+        try {
+        
+            clienteBusiness.actualizarClienteFisico(cliente_Fisico);
+            clienteBusiness.agregarTelefonos(telefonos);
+        
+    }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados estan incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -393,11 +430,11 @@ public class ClienteFisico extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JTextField cel1;
     private javax.swing.JTextField cel2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBoxCanton;
     private javax.swing.JComboBox jComboBoxDistrito;
     private javax.swing.JComboBox jComboBoxProvincias;

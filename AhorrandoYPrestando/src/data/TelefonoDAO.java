@@ -26,7 +26,13 @@ public class TelefonoDAO {
         bd.closeExecuteQuery();
      }
     
-    
+    public void actualizarTelefonos(Telefonos  telefono) throws SQLException{
+        bd = new SQLServerDB();
+        String sql="{call    PA_TELEFONOS_ACTUALIZAR('"+telefono.getTelefono1()+"','"+telefono.getTelefono2()+"','"+telefono.getTelefono3()+"','"
+        +telefono.getCelular1()+"','"+telefono.getCelular2()+"')}";  
+        bd.callStatement(sql);
+        bd.closeExecuteQuery();
+     }
     
     public void codigoTelefono(Telefonos  telefono) throws SQLException{
         bd = new SQLServerDB();
