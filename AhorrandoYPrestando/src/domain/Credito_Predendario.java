@@ -6,21 +6,21 @@ public class Credito_Predendario {
     private int moneda;
     private String proposito;
     private int comision;
-    private int cod_cliente_fisico;
-    private int cod_cliente_juridico;
+    private int id_cliente;
+    private int id_cuenta;
     
     
 
     public Credito_Predendario() {
     }
 
-    public Credito_Predendario(int cod_credito_predendario, int moneda, String proposito, int comision, int cod_cliente_fisico, int cod_cliente_juridico) {
+    public Credito_Predendario(int cod_credito_predendario, int moneda, String proposito, int comision, int id_cliente, int id_cuenta) {
         this.cod_credito_predendario = cod_credito_predendario;
         this.moneda = moneda;
         this.proposito = proposito;
         this.comision = comision;
-        this.cod_cliente_fisico = cod_cliente_fisico;
-        this.cod_cliente_juridico = cod_cliente_juridico;
+        this.id_cliente = id_cliente;
+        this.id_cuenta = id_cuenta;
     }
 
     public int getCod_credito_predendario() {
@@ -55,19 +55,19 @@ public class Credito_Predendario {
         this.comision = comision;
     }
 
-    public int getCod_cliente_fisico() {
-        return cod_cliente_fisico;
+    public int getId_cliente() {
+        return id_cliente;
     }
 
-    public void setCod_cliente_fisico(int cod_cliente_fisico) {
-        this.cod_cliente_fisico = cod_cliente_fisico;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
-    public int getCod_cliente_juridico() {
-        return cod_cliente_juridico;
+    public int getId_cuenta() {
+        return id_cuenta;
     }
 
-    public void setCod_cliente_juridico(int cod_cliente_juridico) {
-        this.cod_cliente_juridico = cod_cliente_juridico;
+    public void setId_cuenta(int id_cuenta) {
+        this.id_cuenta = id_cuenta;
     }
 }

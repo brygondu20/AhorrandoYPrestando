@@ -4,11 +4,20 @@
  */
 package proyecto_banco;
 
+import data.CreditosDAO;
+import domain.Cliente_Cuenta;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Administrador
  */
 public class CreditoPersonal extends javax.swing.JFrame {
+     private ArrayList <Cliente_Cuenta>  lista;
 
     /**
      * Creates new form CuentaCorriente
@@ -16,6 +25,23 @@ public class CreditoPersonal extends javax.swing.JFrame {
     public CreditoPersonal() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    
+    public void cargarCombobox() throws SQLException, Exception{
+        lista=new ArrayList();
+        DefaultComboBoxModel modelo= new DefaultComboBoxModel();
+        
+        CreditosDAO cre= new CreditosDAO();
+        int id_cliente=  Integer.parseInt(txtIdCliente.getText());
+        lista=cre.obtenerId(id_cliente);
+        int id;
+        for(Cliente_Cuenta c: lista){
+            id=c.getId_cuenta();
+            modelo.addElement(id);
+            
+        }
+        jComboBox1.setModel(modelo);
+        
     }
 
     /**
@@ -29,18 +55,20 @@ public class CreditoPersonal extends javax.swing.JFrame {
 
         panelNice5 = new org.edisoncor.gui.panel.PanelNice();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        txtCodCredito = new javax.swing.JTextField();
+        txtIdCliente = new javax.swing.JTextField();
+        jCBMoneda = new javax.swing.JComboBox();
+        txtMonto = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         buttonAeroRight1 = new org.edisoncor.gui.button.ButtonAeroRight();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -49,23 +77,34 @@ public class CreditoPersonal extends javax.swing.JFrame {
 
         panelCurves1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCodCredito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCodCreditoActionPerformed(evt);
             }
         });
-        panelCurves1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 100, -1));
-        panelCurves1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 100, -1));
+        panelCurves1.add(txtCodCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 100, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "$ Dolar", "₡ Colón" }));
-        panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 130, -1));
-        panelCurves1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 130, -1));
+        txtIdCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdClienteActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 100, -1));
 
-        jButton1.setText("Agregar");
-        panelCurves1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 80, -1));
+        jCBMoneda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "$ Dolar", "₡ Colón" }));
+        jCBMoneda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBMonedaActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(jCBMoneda, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, 130, -1));
+        panelCurves1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 180, 130, -1));
 
-        jButton4.setText("Actualizar");
-        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, -1, -1));
+        btnAgregar.setText("Agregar");
+        panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 80, -1));
+
+        btnActualizar.setText("Actualizar");
+        panelCurves1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, -1, -1));
 
         buttonAeroRight1.setBackground(new java.awt.Color(102, 102, 102));
         buttonAeroRight1.setText("Regresar");
@@ -83,8 +122,8 @@ public class CreditoPersonal extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Id Cliente:");
-        panelCurves1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, 20));
+        jLabel2.setText("Id Cuenta:");
+        panelCurves1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, -1, 20));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,6 +140,14 @@ public class CreditoPersonal extends javax.swing.JFrame {
         jLabel4.setText("Moneda:");
         panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, 20));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Id Cliente:");
+        panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, 20));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 100, -1));
+
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
 
         getContentPane().add(panelNice5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
@@ -108,9 +155,9 @@ public class CreditoPersonal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtCodCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodCreditoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtCodCreditoActionPerformed
 
     private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
         // TODO add your handling code here:
@@ -118,6 +165,20 @@ public class CreditoPersonal extends javax.swing.JFrame {
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
+
+    private void jCBMonedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMonedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBMonedaActionPerformed
+
+    private void txtIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdClienteActionPerformed
+        try {
+            cargarCombobox();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreditoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(CreditoPersonal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtIdClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,19 +215,21 @@ public class CreditoPersonal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox jCBMoneda;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
+    private javax.swing.JTextField txtCodCredito;
+    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
 }
