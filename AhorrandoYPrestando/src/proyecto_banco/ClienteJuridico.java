@@ -4,11 +4,22 @@
  */
 package proyecto_banco;
 
+import data.DireccionesDAO;
+import domain.Direcciones;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Administrador
  */
 public class ClienteJuridico extends javax.swing.JFrame {
+    private ArrayList <Direcciones>  lista;
+    private String codDirrecion;
 
     /**
      * Creates new form CuentaCorriente
@@ -16,8 +27,61 @@ public class ClienteJuridico extends javax.swing.JFrame {
     public ClienteJuridico() {
         initComponents();
         this.setLocationRelativeTo(null);
+        try {
+            cargarComboboxCanton();
+            cargarComboboxDistrito();
+            codigo();
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteJuridico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    
+    public void cargarComboboxCanton() throws SQLException, Exception{
+        lista=new ArrayList();
+        DefaultComboBoxModel modelo= new DefaultComboBoxModel();
+        
+        DireccionesDAO dir= new DireccionesDAO();
+        String provincia= (String) jComboBoxProvincias.getSelectedItem();
+        lista=dir.obtenerCanton(provincia);
+        String canton;
+        for(Direcciones d:lista){
+            canton=d.getCANTON();
+            modelo.addElement(canton);
+            
+        }
+        jComboBoxCanton.setModel(modelo);
+        
+    }
+    
+    public void cargarComboboxDistrito() throws SQLException, Exception{
+        lista=new ArrayList();
+        DefaultComboBoxModel modelo= new DefaultComboBoxModel();
+        
+        DireccionesDAO dir= new DireccionesDAO();
+        String provincia= (String) jComboBoxProvincias.getSelectedItem();
+        String canton= (String) jComboBoxCanton.getSelectedItem();
+        lista=dir.obtenerDistrito(provincia, canton);
+        String distrito;
+        for(Direcciones d:lista){
+            distrito=d.getDISTRITO();
+            modelo.addElement(distrito);
+            
+        }
+        jComboBoxDistrito.setModel(modelo);
+        
+    }
+    
+    
+    public void codigo() throws SQLException{
+        DireccionesDAO dir= new DireccionesDAO();
+        Direcciones direccion = new Direcciones();
+        direccion.setPROVINCIA((String) jComboBoxProvincias.getSelectedItem());
+        direccion.setCANTON((String) jComboBoxCanton.getSelectedItem());
+        direccion.setDISTRITO((String) jComboBoxDistrito.getSelectedItem());
+        dir.obtenerDireccion(direccion);
+        codDirrecion=direccion.getCod_direccion();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,11 +98,11 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtIdCliente = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -51,9 +115,9 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
         jTextField13 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
+        jComboBoxProvincias = new javax.swing.JComboBox();
+        jComboBoxDistrito = new javax.swing.JComboBox();
+        jComboBoxCanton = new javax.swing.JComboBox();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,8 +142,8 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jButton4.setText("Actualizar");
         panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, -1, -1));
 
-        jButton1.setText("Agregar");
-        panelCurves1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 80, -1));
+        btnAgregar.setText("Agregar");
+        panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 80, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,14 +154,14 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre:");
         panelCurves1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 20));
-        panelCurves1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 100, 20));
+        panelCurves1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 100, 20));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtIdCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtIdClienteActionPerformed(evt);
             }
         });
-        panelCurves1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 80, 20));
+        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 80, 20));
 
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,14 +205,29 @@ public class ClienteJuridico extends javax.swing.JFrame {
         panelCurves1.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 60, -1));
         panelCurves1.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, 60, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "San Jose", "Cartago", "Alajuela", "Guanacaste", "Limon", "Heredia", "Puntarenas" }));
-        panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 90, -1));
+        jComboBoxProvincias.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "San Jose", "Cartago", "Alajuela", "Guanacaste", "Limon", "Heredia", "Puntarenas" }));
+        jComboBoxProvincias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxProvinciasActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(jComboBoxProvincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 90, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelCurves1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 100, -1));
+        jComboBoxDistrito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDistrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDistritoActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(jComboBoxDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 100, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        panelCurves1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 100, -1));
+        jComboBoxCanton.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCanton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCantonActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(jComboBoxCanton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 100, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -166,9 +245,9 @@ public class ClienteJuridico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtIdClienteActionPerformed
 
     private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
         // TODO add your handling code here:
@@ -176,6 +255,32 @@ public class ClienteJuridico extends javax.swing.JFrame {
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
+
+    private void jComboBoxProvinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProvinciasActionPerformed
+        try {
+            cargarComboboxCanton();
+            codigo();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jComboBoxProvinciasActionPerformed
+
+    private void jComboBoxCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCantonActionPerformed
+        try {
+            cargarComboboxDistrito();
+            codigo();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jComboBoxCantonActionPerformed
+
+    private void jComboBoxDistritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDistritoActionPerformed
+        try {
+           codigo();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jComboBoxDistritoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,12 +317,12 @@ public class ClienteJuridico extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBoxCanton;
+    private javax.swing.JComboBox jComboBoxDistrito;
+    private javax.swing.JComboBox jComboBoxProvincias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -227,12 +332,10 @@ public class ClienteJuridico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField7;
@@ -240,5 +343,7 @@ public class ClienteJuridico extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField9;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
+    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
