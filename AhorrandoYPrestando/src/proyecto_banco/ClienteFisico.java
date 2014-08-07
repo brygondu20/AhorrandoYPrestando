@@ -111,9 +111,7 @@ public class ClienteFisico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
         txtIdCliente = new javax.swing.JTextField();
-        txtApellido1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -132,6 +130,8 @@ public class ClienteFisico extends javax.swing.JFrame {
         jComboBoxCanton = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        txtApellido1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -148,7 +148,7 @@ public class ClienteFisico extends javax.swing.JFrame {
         panelCurves1.add(txtApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 100, -1));
 
         jButton4.setText("Actualizar");
-        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 370, -1, -1));
+        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, -1, -1));
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +156,7 @@ public class ClienteFisico extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 80, -1));
+        panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 80, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -172,9 +172,7 @@ public class ClienteFisico extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Direccion:");
         panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, 20));
-        panelCurves1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 90, 20));
-        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 70, 20));
-        panelCurves1.add(txtApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 100, -1));
+        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 100, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -229,15 +227,16 @@ public class ClienteFisico extends javax.swing.JFrame {
                 jComboBoxDistritoActionPerformed(evt);
             }
         });
-        panelCurves1.add(jComboBoxDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 300, 90, -1));
+        panelCurves1.add(jComboBoxDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, 110, -1));
 
+        jComboBoxProvincias.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComboBoxProvincias.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "San Jose", "Cartago", "Alajuela", "Guanacaste", "Limon", "Heredia", "Puntarenas" }));
         jComboBoxProvincias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxProvinciasActionPerformed(evt);
             }
         });
-        panelCurves1.add(jComboBoxProvincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 80, 20));
+        panelCurves1.add(jComboBoxProvincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 100, -1));
 
         jComboBoxCanton.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxCanton.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +244,7 @@ public class ClienteFisico extends javax.swing.JFrame {
                 jComboBoxCantonActionPerformed(evt);
             }
         });
-        panelCurves1.add(jComboBoxCanton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 90, -1));
+        panelCurves1.add(jComboBoxCanton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 120, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -256,6 +255,8 @@ public class ClienteFisico extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Telefonos:");
         panelCurves1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 140, -1, 20));
+        panelCurves1.add(txtApellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 100, -1));
+        panelCurves1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 100, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
 
@@ -342,6 +343,7 @@ public class ClienteFisico extends javax.swing.JFrame {
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         ClientesDAO cli = new ClientesDAO();
+        
         Padron padron = new Padron();
         padron.setCEDULA(txtCedula.getText());
         
