@@ -5,6 +5,7 @@
 package proyecto_banco;
 
 import business.ClientesBusiness;
+import business.TelefonoBusiness;
 import data.ClientesDAO;
 import data.DireccionesDAO;
 import data.TelefonoDAO;
@@ -280,23 +281,20 @@ public class ClienteFisico extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         
-        
-        
-        try {                                           
-            ClientesDAO clienteDAO = new ClientesDAO();
-            Cliente cliente= new Cliente();
+        try {       
+            
+            ClientesBusiness clienteBusniess = new ClientesBusiness();
+            
+            Cliente cliente = new Cliente();
             cliente.setTipo_cliente(1);
             try {
-                clienteDAO.agregarCliente(cliente);
-            } catch (SQLException ex) {
+                clienteBusniess.agregarCliente(cliente);
+            } catch (Exception ex) {
                 Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            
-            ClientesBusiness clienteBusiness = new ClientesBusiness();
-            
             Cliente_Fisico clienteFisico = new Cliente_Fisico();
-            clienteFisico.setId_cliente(clienteDAO.ultimoID());
+            
             clienteFisico.setCedula(Integer.parseInt(txtCedula.getText()));
             clienteFisico.setNombre(txtNombre.getText());
             clienteFisico.setApellido1(txtApellido1.getText());
@@ -310,29 +308,33 @@ public class ClienteFisico extends javax.swing.JFrame {
             String fecha=año+"/"+mes+"/"+dia;
             clienteFisico.setFec_nacimiento(fecha);
             
-            TelefonoDAO telDAO = new TelefonoDAO();
+            TelefonoBusiness telefonoBusiness = new TelefonoBusiness();
+            
             Telefonos telefonos= new Telefonos();
             telefonos.setTelefono1(tel1.getText());
             telefonos.setTelefono2(tel2.getText());
             telefonos.setTelefono3(tel3.getText());
             telefonos.setCelular1(cel1.getText());
             telefonos.setCelular2(cel2.getText());
-            telDAO.agregarTelefonos(telefonos);
-            telDAO.codigoTelefono(telefonos);
+            telefonoBusiness.agregarTelefonos(telefonos);
+            
             clienteFisico.setCod_telefonos(telefonos.getCod_telefono());
             
-            
-            try {
-               clienteBusiness.agregarTelefonos(telefonos);
+        try {
                 
-                clienteBusiness.agregarClienteFisico(clienteFisico);
+            clienteBusniess.agregarClienteFisico(clienteFisico);
+            
             JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido agregado correctemente ");
         }catch(Exception ex){
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
+        }
+        
         }catch(SQLException ex){
             Logger.getLogger(ClienteFisico.class.getName()).log( Level.SEVERE, null, ex);
+    }   catch (Exception ex) {
+            Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void jComboBoxProvinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProvinciasActionPerformed
@@ -408,7 +410,6 @@ public class ClienteFisico extends javax.swing.JFrame {
         try {
         
             clienteBusiness.actualizarClienteFisico(cliente_Fisico);
-            clienteBusiness.agregarTelefonos(telefonos);
         
     }catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane, "Los datos ingresados estan incorrectos", "Error", JOptionPane.ERROR_MESSAGE);

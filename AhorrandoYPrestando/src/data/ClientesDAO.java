@@ -162,7 +162,7 @@ public class ClientesDAO {
      public boolean existeCliente_Juridico(Cliente_Juridico cliente_Juridico)throws SQLException{
         boolean exist = false;
         bd= new SQLServerDB();
-        String sql= "{call PA_CONSULATAR_ID_Cliente_Juridico"+cliente_Juridico.getCed_juridica()+"}";
+        String sql= "{call PA_CONSULATAR_ID_Cliente_Juridico("+cliente_Juridico.getCed_juridica()+")}";
         ResultSet res = bd.executeQuery(sql);
         if (res.next()){
             exist = true;
