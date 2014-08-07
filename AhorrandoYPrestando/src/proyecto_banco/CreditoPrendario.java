@@ -29,11 +29,11 @@ public class CreditoPrendario extends javax.swing.JFrame {
 
         panelNice5 = new org.edisoncor.gui.panel.PanelNice();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtCodigoCredito = new javax.swing.JTextField();
+        txtIdCliente = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox();
         jComboBox1 = new javax.swing.JComboBox();
-        jTextField6 = new javax.swing.JTextField();
+        txtComision = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,20 +51,20 @@ public class CreditoPrendario extends javax.swing.JFrame {
 
         panelCurves1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigoCredito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCodigoCreditoActionPerformed(evt);
             }
         });
-        panelCurves1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 100, -1));
-        panelCurves1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 100, -1));
+        panelCurves1.add(txtCodigoCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 100, -1));
+        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 100, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "$ Dolar", "₡ Colón" }));
         panelCurves1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 130, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vehiculo Nuevo", "Vehiculo Usado" }));
         panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 100, -1));
-        panelCurves1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 130, -1));
+        panelCurves1.add(txtComision, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 130, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,9 +118,9 @@ public class CreditoPrendario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtCodigoCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoCreditoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtCodigoCreditoActionPerformed
 
     private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
         // TODO add your handling code here:
@@ -175,10 +175,10 @@ public class CreditoPrendario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
+    private javax.swing.JTextField txtCodigoCredito;
+    private javax.swing.JTextField txtComision;
+    private javax.swing.JTextField txtIdCliente;
     // End of variables declaration//GEN-END:variables
 }
