@@ -4,13 +4,19 @@
  */
 package proyecto_banco;
 
+import data.ClientesDAO;
+import domain.Cliente_Fisico;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.Panel;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import org.edisoncor.gui.panel.PanelAvatarChooser;
 
 /**
@@ -18,6 +24,7 @@ import org.edisoncor.gui.panel.PanelAvatarChooser;
  * @author Administrador
  */
 public class ClienteConsulta extends javax.swing.JFrame {
+    private  ArrayList<Cliente_Fisico>lista;
 
     /**
      * Creates new form Principal
@@ -25,8 +32,50 @@ public class ClienteConsulta extends javax.swing.JFrame {
     public ClienteConsulta() {
         initComponents();
         this.setLocationRelativeTo(null);
+        try {
+            cargarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
        
+    
+    
+    
+    
+    public  void cargarTabla() throws SQLException{
+        jTable1.setVisible(true);
+        DefaultTableModel modelo =new DefaultTableModel();
+        String datos[]=new String[8];
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido1");
+        modelo.addColumn("Apellido2");
+        modelo.addColumn("Correo");
+        modelo.addColumn("Fecha nacimiento");
+        modelo.addColumn("Cod direccion");
+        modelo.addColumn("Cod telefonos");
+        
+        ClientesDAO clienteDAO = new ClientesDAO();
+        lista=clienteDAO.consultarTodoClienteFisico();
+        
+        for(Cliente_Fisico c:lista){
+            datos[0]=String.valueOf(c.getCedula());
+            datos[1]=c.getNombre();
+            datos[2]=c.getApellido1();
+            datos[3]=c.getApellido2();
+            datos[4]=c.getCorreo();
+            datos[5]=c.getFec_nacimiento();
+            datos[6]=c.getCodDireccion();
+            datos[7]=String.valueOf(c.getCod_telefonos());
+            modelo.addRow(datos);
+        }
+        
+        jTable1.setModel(modelo);
+        
+        
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,6 +131,11 @@ public class ClienteConsulta extends javax.swing.JFrame {
         panelReflect1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, -1, -1));
 
         jButton2.setText("Borrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         panelReflect1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 79, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -133,6 +187,18 @@ public class ClienteConsulta extends javax.swing.JFrame {
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            int seleccionado= jTable1.getSelectedRow();
+            int cedula= lista.get(seleccionado).getCedula();
+            ClientesDAO clienteDAO = new ClientesDAO();
+            clienteDAO.borrarCliente_Fisico(cedula);
+             cargarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     
     /**

@@ -12,6 +12,7 @@ import domain.Cliente_Juridico;
 import domain.Padron;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -113,9 +114,9 @@ public class ClientesDAO {
     
     /************************Eliminados**********************************/
  
-     public void borrarCliente_Fisico(Cliente_Fisico clienteFisico) throws SQLException{
+     public void borrarCliente_Fisico(int cedula) throws SQLException{
         bd = new SQLServerDB();
-        String sql=" {call PA_CONSULTAR_ELIMINAR_Cliente_Fisico ("+clienteFisico.getCedula()+"')}";
+        String sql=" {call PA_ELIMINAR_Cliente_Fisico ("+cedula+")}";
         bd.callStatement(sql);
         bd.closeExecuteQuery();
      }
@@ -129,13 +130,52 @@ public class ClientesDAO {
 
     /***************CONSULTAR**************/
      
-    public void consultarCliente_Fisico(Cliente_Fisico clienteFisico) throws SQLException {
+    /*public void consultarCliente_Fisico(Cliente_Fisico clienteFisico) throws SQLException {
         bd = new SQLServerDB();
-        String sql = " {call PA_CONSULTAR_TODO_CLIENTE_FISICO (" + clienteFisico.getId_cliente() + "," + clienteFisico.getCedula() + ",'" + clienteFisico.getNombre() + "','" + clienteFisico.getApellido1() + "','" + clienteFisico.getApellido2() + "',"
+        String sql = " {call PA_CONSULATAR_ID_Cliente_Fisico (" + clienteFisico.getId_cliente() + "," + clienteFisico.getCedula() + ",'" + clienteFisico.getNombre() + "','" + clienteFisico.getApellido1() + "','" + clienteFisico.getApellido2() + "',"
                 + "'" + clienteFisico.getCodDireccion() + "'," + clienteFisico.getCod_telefonos() + ",'" + clienteFisico.getCorreo() + "','" + clienteFisico.getFec_nacimiento() + "')}";
         bd.callStatement(sql);
         bd.closeExecuteQuery();
-    }
+    }*/
+     
+     public ArrayList consultarTodoClienteFisico() throws SQLException{
+        bd = new SQLServerDB();
+        String sql= "{call PA_CONSULTAR_TODO_CLIENTE_FISICO()}";
+        ResultSet res =bd.executeQuery(sql);
+        ArrayList<Cliente_Fisico> a= new ArrayList();
+        while(res.next()){
+            Cliente_Fisico clienteFisico= new Cliente_Fisico();
+            clienteFisico.setCedula(res.getInt("cedula"));
+            clienteFisico.setNombre(res.getString("nombre"));
+            clienteFisico.setApellido1(res.getString("apellido paterno"));
+            clienteFisico.setApellido2(res.getString("apellido materno"));
+            clienteFisico.setFec_nacimiento(res.getString("Fecha De Nacimiento"));
+            clienteFisico.setCorreo(res.getString("correo"));
+            clienteFisico.setCodDireccion(res.getString("direccion"));
+            clienteFisico.setCod_telefonos(res.getInt("telefono"));
+            a.add(clienteFisico);
+        }
+        bd.closeExecuteQuery();
+        return a;
+                
+     }
+     
+     
+     public void consultarCliente_Fisico(Cliente_Fisico clienteFisico) throws SQLException {
+        bd= new SQLServerDB();
+        String sql= "{call PA_CONSULTAR_ID_Cliente_Fisico("+clienteFisico.getId_cliente()+")}";
+        ResultSet res = bd.executeQuery(sql);
+        while (res.next()){
+            clienteFisico.setNombre(res.getString("nombre"));
+            clienteFisico.setApellido1(res.getString("apellido_paterno"));
+            clienteFisico.setApellido2(res.getString("apellido_materno"));
+            clienteFisico.setFec_nacimiento(res.getString("fec_nacimiento"));
+            clienteFisico.setCorreo(res.getString("correo"));
+            clienteFisico.setCodDireccion(res.getString("cod_direccion"));
+            clienteFisico.setCod_telefonos(res.getInt("cod_telefono"));
+            
+        }
+     }
 
     public void consultarCliente_Juridico(Cliente_Juridico clienteJuridico) throws SQLException {
         bd = new SQLServerDB();

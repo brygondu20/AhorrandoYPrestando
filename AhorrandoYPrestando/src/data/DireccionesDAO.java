@@ -62,11 +62,26 @@ public class DireccionesDAO {
     
     
     public void obtenerDireccion(Direcciones direccion) throws SQLException{
-         bd =new SQLServerDB();
-         String sql= "{call PA_CONSULTAR_DIRECCIONES_CODIGO('"+direccion.getPROVINCIA()+"','"+direccion.getCANTON()+"','"+direccion.getDISTRITO()+"' )}";
+        bd =new SQLServerDB();
+        String sql= "{call PA_CONSULTAR_DIRECCIONES_CODIGO('"+direccion.getPROVINCIA()+"','"+direccion.getCANTON()+"','"+direccion.getDISTRITO()+"' )}";
         ResultSet res =bd.executeQuery(sql);
          while(res.next()){
              direccion.setCod_direccion(res.getString("cod_direccion"));
          }
+         bd.closeExecuteQuery();
     }
+    
+    
+    public void consultarDireccion(Direcciones direccion) throws SQLException{
+        bd =new SQLServerDB();
+        String sql ="{call PA_CONSULTAR_Direccion('"+direccion.getCod_direccion()+"')}";
+        ResultSet res =bd.executeQuery(sql);
+        while(res.next()){
+             direccion.setPROVINCIA(res.getString("provincia"));
+             direccion.setCANTON(res.getString("canton"));
+             direccion.setDISTRITO(res.getString("distrito"));
+        }
+        bd.closeExecuteQuery();
+    }
+    
 }
