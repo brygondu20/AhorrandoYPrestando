@@ -11,14 +11,9 @@ public class Cliente_Fisico{
     private String correo;
     private String fec_nacimiento;
     
-        
-    
-    
-
     public Cliente_Fisico() {
     }
 
-    
 
     public Cliente_Fisico(int id_cliente, int Cedula, String Nombre, String Apellido1, String Apellido2, String codDireccion, int cod_telefonos, String correo, String fec_nacimiento) {
         this.id_cliente = id_cliente;

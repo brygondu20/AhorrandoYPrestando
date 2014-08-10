@@ -69,6 +69,22 @@ public class ClientesDAO {
          }
     }
      
+     public void obtenerDatosIdCliente(Cliente_Fisico clienteFisico) throws SQLException{
+         bd =new SQLServerDB();
+         String sql="{call PA_CONSULTAR_CLIENTE_FISICO_TODO("+clienteFisico.getId_cliente()+")}";
+        ResultSet res =bd.executeQuery(sql);
+         while(res.next()){
+             clienteFisico.setCedula(res.getInt("cedula"));
+             clienteFisico.setNombre(res.getString("nombre"));
+             clienteFisico.setApellido1(res.getString("apellido_paterno"));
+             clienteFisico.setApellido2(res.getString("apellido_materno"));
+             clienteFisico.setCorreo(res.getString("correo"));
+             clienteFisico.setCod_telefonos(res.getInt("cod_telefonos"));
+             clienteFisico.setCodDireccion(res.getString("cod_direccion"));
+             clienteFisico.setFec_nacimiento(res.getString("fec_nacimiento"));
+         }
+    } 
+     
      
      public int idClienteFisico(int cedula) throws SQLException{
         bd =new SQLServerDB();
@@ -87,7 +103,7 @@ public class ClientesDAO {
         String sql="{call PA_CONSULTAR_CLIENTE_ultimo_id()}";
         ResultSet res =bd.executeQuery(sql);
         while(res.next()){
-            return res.getInt("id_cliente");
+            return res.getInt("id_cliente")+1;
         }
         return 0;
          
@@ -99,7 +115,7 @@ public class ClientesDAO {
     public void actualizarCliente_Fisico(Cliente_Fisico clienteFisico) throws SQLException {
         bd = new SQLServerDB();
         String sql = " {call PA_MODIFICAR_Cliente_Fisico (" + clienteFisico.getId_cliente() + "," + clienteFisico.getCedula() + ",'" + clienteFisico.getNombre() + "','" + clienteFisico.getApellido1() + "','" + clienteFisico.getApellido2() + "',"
-                + "'" + clienteFisico.getCodDireccion() + "'," + clienteFisico.getCod_telefonos() + ",'" + clienteFisico.getCorreo() + "','" + clienteFisico.getFec_nacimiento() + "')}";
+                + "'" + clienteFisico.getCodDireccion() + "'," + clienteFisico.getCod_telefonos() + ",'" + clienteFisico.getFec_nacimiento() + "','" + clienteFisico.getCorreo() + "')}";
         bd.callStatement(sql);
         bd.closeExecuteQuery();
     }
@@ -193,7 +209,7 @@ public class ClientesDAO {
      public boolean existeCliente_Fisico(Cliente_Fisico cliente_Fisico)throws SQLException{
         boolean exist = false;
         bd= new SQLServerDB();
-        String sql= "{call PA_CONSULATAR_ID_Cliente_Fisico("+cliente_Fisico.getCedula()+")}";
+        String sql= "{call PA_CONSULTAR_ID_Cliente_Fisico("+cliente_Fisico.getCedula()+")}";
         ResultSet res = bd.executeQuery(sql);
         if (res.next()){
             exist = true;
@@ -205,7 +221,7 @@ public class ClientesDAO {
      public boolean existeCliente_Juridico(Cliente_Juridico cliente_Juridico)throws SQLException{
         boolean exist = false;
         bd= new SQLServerDB();
-        String sql= "{call PA_CONSULATAR_ID_Cliente_Juridico("+cliente_Juridico.getCed_juridica()+")}";
+        String sql= "{call PA_CONSULTAR_ID_Cliente_Juridico("+cliente_Juridico.getCed_juridica()+")}";
         ResultSet res = bd.executeQuery(sql);
         if (res.next()){
             exist = true;

@@ -29,7 +29,7 @@ public class ClientesBusiness {
     }
     
     public void agregarCliente(Cliente cliente)throws SQLException, Exception{
-        
+        cliente.setTipo_cliente(clientesDAO.ultimoID());
     }
     
     public void agregarClienteFisico(Cliente_Fisico cliente_Fisico)throws SQLException, Exception{

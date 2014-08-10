@@ -195,7 +195,8 @@ public class CuentaAhorro extends javax.swing.JFrame {
             
             ClientesDAO cliente= new ClientesDAO();
             Cliente_Cuenta clienteCuenta= new Cliente_Cuenta();
-            int idCliente=cliente.idClienteFisico(Integer.parseInt(txtCedula.getText()));
+            int idCliente;
+            idCliente = cliente.idClienteFisico(Integer.parseInt(txtCedula.getText()));
             clienteCuenta.setId_cliente(idCliente);
             clienteCuenta.setId_cuenta(cuenta.getId_cuenta());
             cliente.agregarCliente_cuenta(clienteCuenta);

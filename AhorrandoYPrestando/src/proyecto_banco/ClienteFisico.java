@@ -40,6 +40,17 @@ public class ClienteFisico extends javax.swing.JFrame {
             cargarComboboxCanton();
             cargarComboboxDistrito();
             codigo();
+            txtNombre.setEditable(false);
+            txtApellido1.setEditable(false);
+            txtApellido2.setEditable(false);
+            txtCorreo.setEditable(false);
+            tel1.setEditable(false);
+            tel2.setEditable(false);
+            tel3.setEditable(false);
+            cel1.setEditable(false);
+            cel2.setEditable(false);
+            jDateChooser1.setEnabled(false);
+            
         } catch (Exception ex) {
             Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -337,7 +348,7 @@ public class ClienteFisico extends javax.swing.JFrame {
         
         }catch(SQLException ex){
             Logger.getLogger(ClienteFisico.class.getName()).log( Level.SEVERE, null, ex);
-    }   catch (Exception ex) {
+        }catch(Exception ex){
             Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -370,6 +381,20 @@ public class ClienteFisico extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxDistritoActionPerformed
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+         //txtIdCliente.setEditable(false);
+        btnActualizar.setEnabled(false);
+        
+            txtNombre.setEditable(true);
+            txtApellido1.setEditable(true);
+            txtApellido2.setEditable(true);
+            txtCorreo.setEditable(true);
+            tel1.setEditable(true);
+            tel2.setEditable(true);
+            tel3.setEditable(true);
+            cel1.setEditable(true);
+            cel2.setEditable(true);
+            jDateChooser1.setEnabled(true);
+        
         ClientesDAO cli = new ClientesDAO();
         
         Padron padron = new Padron();
@@ -383,53 +408,105 @@ public class ClienteFisico extends javax.swing.JFrame {
             codDirrecion=padron.getCODELEC().trim();
         } catch (Exception ex) {
             Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        }
     }//GEN-LAST:event_txtCedulaActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-        ClientesBusiness clienteBusiness = new ClientesBusiness();
-        
-        Cliente_Fisico cliente_Fisico = new Cliente_Fisico();
-        cliente_Fisico.setCedula(Integer.parseInt(txtCedula.getText()));
-        cliente_Fisico.setNombre(txtNombre.getText());
-        cliente_Fisico.setApellido1(txtApellido1.getText());
-        cliente_Fisico.setApellido2(txtApellido2.getText());
-        cliente_Fisico.setCodDireccion(codDirrecion);
-        cliente_Fisico.setCorreo(txtCorreo.getText());
-        
-        int dia=jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
-        int mes=jDateChooser1.getCalendar().get(Calendar.MONTH);
-        int año=jDateChooser1.getCalendar().get(Calendar.YEAR);
-        String fecha=año+"/"+mes+"/"+dia;
-        cliente_Fisico.setFec_nacimiento(fecha);
-        
-        Telefonos telefonos= new Telefonos();
-        telefonos.setTelefono1(tel1.getText());
-        telefonos.setTelefono2(tel2.getText());
-        telefonos.setTelefono3(tel3.getText());
-        telefonos.setCelular1(cel1.getText());
-        telefonos.setCelular2(cel2.getText());
-        
-        cliente_Fisico.setCod_telefonos(telefonos.getCod_telefono());
-        
+        try {       
+            
+            ClientesBusiness clienteBusniess = new ClientesBusiness();
+            
+            Cliente_Fisico clienteFisico = new Cliente_Fisico();
+            
+            clienteFisico.setCedula(Integer.parseInt(txtCedula.getText()));
+            clienteFisico.setNombre(txtNombre.getText());
+            clienteFisico.setApellido1(txtApellido1.getText());
+            clienteFisico.setApellido2(txtApellido2.getText());
+            clienteFisico.setCodDireccion(codDirrecion);
+            clienteFisico.setCorreo(txtCorreo.getText());
+            
+            int dia=jDateChooser1.getCalendar().get(Calendar.DAY_OF_MONTH);
+            int mes=jDateChooser1.getCalendar().get(Calendar.MONTH);
+            int año=jDateChooser1.getCalendar().get(Calendar.YEAR);
+            String fecha=año+"/"+mes+"/"+dia;
+            clienteFisico.setFec_nacimiento(fecha);
+            
+            TelefonoBusiness telefonoBusiness = new TelefonoBusiness();
+            
+            Telefonos telefonos= new Telefonos();
+            telefonos.setTelefono1(tel1.getText());
+            telefonos.setTelefono2(tel2.getText());
+            telefonos.setTelefono3(tel3.getText());
+            telefonos.setCelular1(cel1.getText());
+            telefonos.setCelular2(cel2.getText());
+            telefonoBusiness.agregarTelefonos(telefonos);
+            
+            clienteFisico.setCod_telefonos(telefonos.getCod_telefono());
+            
         try {
+                
+            clienteBusniess.actualizarClienteFisico(clienteFisico);
+            
+            JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido actualizado correctemente ");
+            
+            Principal principal = new Principal();
+            principal.setVisible(true);
+            this.dispose();
+            
+        }catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
-            clienteBusiness.actualizarClienteFisico(cliente_Fisico);
-        
-    }catch(Exception ex){
-            JOptionPane.showMessageDialog(rootPane, "Los datos ingresados estan incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+        }catch(SQLException ex){
+            Logger.getLogger(ClienteFisico.class.getName()).log( Level.SEVERE, null, ex);
+    }   catch (Exception ex) {
+            Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void txtIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdClienteActionPerformed
         
+        btnAgregar.setEnabled(false);
+        
+            txtNombre.setEditable(true);
+            txtApellido1.setEditable(true);
+            txtApellido2.setEditable(true);
+            txtCorreo.setEditable(true);
+            tel1.setEditable(true);
+            tel2.setEditable(true);
+            tel3.setEditable(true);
+            cel1.setEditable(true);
+            cel2.setEditable(true);
+            jDateChooser1.setEnabled(true);
+        
+        ClientesDAO cli = new ClientesDAO();
+        
+        Cliente_Fisico cliente_Fisico = new Cliente_Fisico();
+        cliente_Fisico.setId_cliente(Integer.parseInt(txtIdCliente.getText()));
+        
+        
+        try{
+            cli.obtenerDatosIdCliente(cliente_Fisico);
+            txtCedula.setText(String.valueOf(cliente_Fisico.getCedula()));
+            txtNombre.setText(cliente_Fisico.getNombre().trim());
+            txtApellido1.setText(cliente_Fisico.getApellido1().trim());
+            txtApellido2.setText(cliente_Fisico.getApellido2().trim());
+            txtCorreo.setText(cliente_Fisico.getCorreo().trim());
+            //tel1.setText(cliente_Fisico.getCod_telefonos().trim());
+            jDateChooser1.setDateFormatString(cliente_Fisico.getFec_nacimiento().trim());
+            codDirrecion = cliente_Fisico.getCodDireccion().trim();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_txtIdClienteActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
