@@ -36,7 +36,7 @@ public class CreditoHipotecario extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxProposito = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -80,8 +80,13 @@ public class CreditoHipotecario extends javax.swing.JFrame {
         panelCurves1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, 20));
         panelCurves1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 130, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compra Casa", "Compra Lote", "Hipoteca Casa" }));
-        panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 100, 20));
+        jComboBoxProposito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compra Casa", "Compra Lote", "Hipoteca Casa" }));
+        jComboBoxProposito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPropositoActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(jComboBoxProposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 100, 20));
 
         jButton1.setText("Agregar");
         panelCurves1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 80, -1));
@@ -129,6 +134,25 @@ public class CreditoHipotecario extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
 
+    private void jComboBoxPropositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPropositoActionPerformed
+        // TODO add your handling code here:
+        int proposito = jComboBoxProposito.getSelectedIndex();
+        switch(proposito){
+            case 0:
+                CreditoHipotecarioCompraCasa creditoHipotecarioCompraCasa = new CreditoHipotecarioCompraCasa();
+                creditoHipotecarioCompraCasa.setVisible(true);
+            break;
+            case 1: 
+                CreditoHipotecarioCompraLote creditoHipotecarioCompraLote = new CreditoHipotecarioCompraLote();
+                creditoHipotecarioCompraLote.setVisible(true);
+            break;
+            case 2:
+                CreditoHipotecarioHipotecaCasa CreditoHipotecarioHipotecaCasa = new CreditoHipotecarioHipotecaCasa();
+                CreditoHipotecarioHipotecaCasa.setVisible(true);
+            break;    
+        }
+    }//GEN-LAST:event_jComboBoxPropositoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -167,8 +191,8 @@ public class CreditoHipotecario extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBoxProposito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -4,6 +4,7 @@
  */
 package proyecto_banco;
 
+import connection.SQLServerDB;
 import data.ClientesDAO;
 import domain.Cliente_Fisico;
 import domain.Direcciones;
@@ -11,6 +12,7 @@ import java.awt.Image;
 import java.awt.List;
 import java.awt.Panel;
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -39,12 +41,48 @@ public class ClienteConsulta extends javax.swing.JFrame {
             Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       
+      
+    public void cargarTabla() throws SQLException{
+        SQLServerDB sqlServerDB= new SQLServerDB();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido1");
+        modelo.addColumn("Apellido2");
+        modelo.addColumn("Correo");
+        modelo.addColumn("Fecha nacimiento");
+        modelo.addColumn("Provincia");
+        modelo.addColumn("Canton");
+        modelo.addColumn("Distrito");
+        modelo.addColumn("Tel 1");
+        modelo.addColumn("Tel 2");
+        modelo.addColumn("Tel 3");
+        modelo.addColumn("Cel 1");
+        modelo.addColumn("Cel 2");
+        String sql = "{call PA_CONSULTAR_VIEW_CLIENTE_FISICO()}";
+        ResultSet res = sqlServerDB.executeQuery(sql);
+        String[] datos = new String[14];
+        while (res.next()){
+            datos[0]= res.getString("cedula");
+            datos[1]= res.getString("nombre");
+            datos[2]= res.getString("apellido_paterno");
+            datos[3]= res.getString("apellido_materno");
+            datos[4]= res.getString("correo");
+            datos[5]= res.getString("fec_nacimiento");
+            datos[6]= res.getString("PROVINCIA");
+            datos[7]= res.getString("CANTON");
+            datos[8]= res.getString("DISTRITO");
+            datos[9]= res.getString("telefono1");
+            datos[10]= res.getString("telefono2");
+            datos[11]= res.getString("telefono3");
+            datos[12]= res.getString("celular1");
+            datos[13]= res.getString("celular2");
+            modelo.addRow(datos);
+        }
+        jTable1.setModel(modelo);
+    }
     
-    
-    
-    
-    public  void cargarTabla() throws SQLException{
+    /*public  void cargarTabla() throws SQLException{
         jTable1.setVisible(true);
         DefaultTableModel modelo =new DefaultTableModel();
         String datos[]=new String[8];
@@ -75,7 +113,7 @@ public class ClienteConsulta extends javax.swing.JFrame {
         
         
         
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,8 +130,8 @@ public class ClienteConsulta extends javax.swing.JFrame {
         panelReflect1 = new org.edisoncor.gui.panel.PanelReflect();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBConsultar = new javax.swing.JButton();
+        jBBorrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -127,20 +165,25 @@ public class ClienteConsulta extends javax.swing.JFrame {
 
         panelReflect1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 700, 340));
 
-        jButton3.setText("Consultar");
-        panelReflect1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, -1, -1));
-
-        jButton2.setText("Borrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBConsultar.setText("Consultar");
+        jBConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBConsultarActionPerformed(evt);
             }
         });
-        panelReflect1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 79, -1));
+        panelReflect1.add(jBConsultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, -1, -1));
+
+        jBBorrar.setText("Borrar");
+        jBBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBorrarActionPerformed(evt);
+            }
+        });
+        panelReflect1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 79, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Codigo Credito:");
+        jLabel1.setText("Cedula:");
         panelReflect1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 20));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,13 +191,13 @@ public class ClienteConsulta extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
-        panelReflect1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 80, 20));
+        panelReflect1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 80, 20));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Id Cliente:");
-        panelReflect1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, 20));
-        panelReflect1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, 70, -1));
+        panelReflect1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, 20));
+        panelReflect1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 110, 70, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,17 +231,23 @@ public class ClienteConsulta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarActionPerformed
         try {
             int seleccionado= jTable1.getSelectedRow();
-            int cedula= lista.get(seleccionado).getCedula();
+            int cedula = lista.get(seleccionado).getCedula();
             ClientesDAO clienteDAO = new ClientesDAO();
             clienteDAO.borrarCliente_Fisico(cedula);
              cargarTabla();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
         }   
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBBorrarActionPerformed
+
+    private void jBConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jBConsultarActionPerformed
     
     
     /**
@@ -237,8 +286,8 @@ public class ClienteConsulta extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jBBorrar;
+    private javax.swing.JButton jBConsultar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;

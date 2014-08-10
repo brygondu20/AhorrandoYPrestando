@@ -32,7 +32,7 @@ public class CreditoPrendario extends javax.swing.JFrame {
         txtCodigoCredito = new javax.swing.JTextField();
         txtIdCliente = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBoxProposito = new javax.swing.JComboBox();
         txtComision = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -62,8 +62,13 @@ public class CreditoPrendario extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "$ Dolar", "₡ Colón" }));
         panelCurves1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 130, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vehiculo Nuevo", "Vehiculo Usado" }));
-        panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 100, -1));
+        jComboBoxProposito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vehiculo Nuevo", "Vehiculo Usado" }));
+        jComboBoxProposito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPropositoActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(jComboBoxProposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 100, -1));
         panelCurves1.add(txtComision, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 130, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -129,6 +134,22 @@ public class CreditoPrendario extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
 
+    private void jComboBoxPropositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPropositoActionPerformed
+        // TODO add your handling code here:
+        int proposito = jComboBoxProposito.getSelectedIndex();
+        switch(proposito){
+            case 0:
+                
+            break;
+            case 1:
+            
+            break;
+            case 2:
+            
+            break;    
+        }
+    }//GEN-LAST:event_jComboBoxPropositoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -167,8 +188,8 @@ public class CreditoPrendario extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBoxProposito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

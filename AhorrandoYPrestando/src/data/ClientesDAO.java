@@ -156,7 +156,7 @@ public class ClientesDAO {
      
      public ArrayList consultarTodoClienteFisico() throws SQLException{
         bd = new SQLServerDB();
-        String sql= "{call PA_CONSULTAR_TODO_CLIENTE_FISICO()}";
+        String sql= "{call PA_CONSULTAR_VIEW_CLIENTE_FISICO()}";
         ResultSet res =bd.executeQuery(sql);
         ArrayList<Cliente_Fisico> a= new ArrayList();
         
