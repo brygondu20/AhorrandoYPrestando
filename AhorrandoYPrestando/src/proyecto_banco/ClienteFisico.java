@@ -431,7 +431,7 @@ public class ClienteFisico extends javax.swing.JFrame {
             int año=jDateChooser1.getCalendar().get(Calendar.YEAR);
             String fecha=año+"/"+mes+"/"+dia;
             clienteFisico.setFec_nacimiento(fecha);
-            System.out.println(fecha);
+            
             
             TelefonoBusiness telefonoBusiness = new TelefonoBusiness();
             

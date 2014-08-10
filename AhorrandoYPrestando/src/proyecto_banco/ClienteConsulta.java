@@ -62,7 +62,14 @@ public class ClienteConsulta extends javax.swing.JFrame {
         String sql = "{call PA_CONSULTAR_VIEW_CLIENTE_FISICO()}";
         ResultSet res = sqlServerDB.executeQuery(sql);
         String[] datos = new String[14];
+        lista= new ArrayList();
         while (res.next()){
+            
+            
+            Cliente_Fisico clienteFisico = new Cliente_Fisico();
+            clienteFisico.setCedula(res.getInt("cedula"));
+            lista.add(clienteFisico);
+            
             datos[0]= res.getString("cedula");
             datos[1]= res.getString("nombre");
             datos[2]= res.getString("apellido_paterno");
@@ -77,6 +84,7 @@ public class ClienteConsulta extends javax.swing.JFrame {
             datos[11]= res.getString("telefono3");
             datos[12]= res.getString("celular1");
             datos[13]= res.getString("celular2");
+            
             modelo.addRow(datos);
         }
         jTable1.setModel(modelo);
@@ -133,7 +141,7 @@ public class ClienteConsulta extends javax.swing.JFrame {
         jBConsultar = new javax.swing.JButton();
         jBBorrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -186,12 +194,12 @@ public class ClienteConsulta extends javax.swing.JFrame {
         jLabel1.setText("Cedula:");
         panelReflect1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 20));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCedulaActionPerformed(evt);
             }
         });
-        panelReflect1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 80, 20));
+        panelReflect1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 80, 20));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,9 +228,9 @@ public class ClienteConsulta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtCedulaActionPerformed
 
     private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
         // TODO add your handling code here:
@@ -237,14 +245,64 @@ public class ClienteConsulta extends javax.swing.JFrame {
             int cedula = lista.get(seleccionado).getCedula();
             ClientesDAO clienteDAO = new ClientesDAO();
             clienteDAO.borrarCliente_Fisico(cedula);
-             cargarTabla();
+            cargarTabla();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }//GEN-LAST:event_jBBorrarActionPerformed
 
     private void jBConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarActionPerformed
-        // TODO add your handling code here:
+         SQLServerDB sqlServerDB= new SQLServerDB();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido1");
+        modelo.addColumn("Apellido2");
+        modelo.addColumn("Correo");
+        modelo.addColumn("Fecha nacimiento");
+        modelo.addColumn("Provincia");
+        modelo.addColumn("Canton");
+        modelo.addColumn("Distrito");
+        modelo.addColumn("Tel 1");
+        modelo.addColumn("Tel 2");
+        modelo.addColumn("Tel 3");
+        modelo.addColumn("Cel 1");
+        modelo.addColumn("Cel 2");
+        String sql = "{call PA_CONSULTAR_VIEW_cliente_fisico_cedula("+Integer.parseInt(txtCedula.getText())+")}";
+        ResultSet res;
+        try {
+        res = sqlServerDB.executeQuery(sql);
+        
+        String[] datos = new String[14];
+        lista= new ArrayList();
+        while (res.next()){
+            Cliente_Fisico clienteFisico = new Cliente_Fisico();
+            clienteFisico.setCedula(res.getInt("cedula"));
+            lista.add(clienteFisico);
+            
+            datos[0]= res.getString("cedula");
+            datos[1]= res.getString("nombre");
+            datos[2]= res.getString("apellido_paterno");
+            datos[3]= res.getString("apellido_materno");
+            datos[4]= res.getString("correo");
+            datos[5]= res.getString("fec_nacimiento");
+            datos[6]= res.getString("PROVINCIA");
+            datos[7]= res.getString("CANTON");
+            datos[8]= res.getString("DISTRITO");
+            datos[9]= res.getString("telefono1");
+            datos[10]= res.getString("telefono2");
+            datos[11]= res.getString("telefono3");
+            datos[12]= res.getString("celular1");
+            datos[13]= res.getString("celular2");
+            
+            modelo.addRow(datos);
+            
+        }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jTable1.setModel(modelo);
         
         
     }//GEN-LAST:event_jBConsultarActionPerformed
@@ -293,11 +351,11 @@ public class ClienteConsulta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField8;
     private org.edisoncor.gui.panel.PanelAvatarChooser panelAvatarChooser1;
     private org.edisoncor.gui.panel.PanelAvatarChooser panelAvatarChooser3;
     private org.edisoncor.gui.panel.PanelNice panelNice2;
     private org.edisoncor.gui.panel.PanelReflect panelReflect1;
+    private javax.swing.JTextField txtCedula;
     // End of variables declaration//GEN-END:variables
 }
