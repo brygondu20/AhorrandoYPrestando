@@ -2,9 +2,10 @@ package domain;
 
 
 public class Cliente_Juridico {
-    
+    private int id_cliente;
     private int ced_juridica;
     private String nombre_Empresa;
+    private String nombre_Representante;
     private String apellido1;
     private String apellido2;
     private String codDireccion;
@@ -17,9 +18,11 @@ public class Cliente_Juridico {
 
     
 
-    public Cliente_Juridico(int ced_juridica, String nombre_Empresa, String apellido1, String apellido2, String codDireccion, int cod_telefono) {
+    public Cliente_Juridico(int id_cliente, int ced_juridica, String nombre_Empresa, String nombre_Representante, String apellido1, String apellido2, String codDireccion, int cod_telefono) {
+        this.id_cliente = id_cliente;
         this.ced_juridica = ced_juridica;
         this.nombre_Empresa = nombre_Empresa;
+        this.nombre_Representante = nombre_Representante;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.codDireccion = codDireccion;
@@ -76,6 +79,21 @@ public class Cliente_Juridico {
         this.apellido2 = apellido2;
     }
 
-    
+    public String getNombre_Representante() {
+        return nombre_Representante;
+    }
+
+    public void setNombre_Representante(String nombre_Representante) {
+        this.nombre_Representante = nombre_Representante;
+    }
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
     
 }

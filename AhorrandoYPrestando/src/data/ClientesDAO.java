@@ -39,9 +39,9 @@ public class ClientesDAO {
             
      public void agregarCliente_juridico(Cliente_Juridico clienteJuridico) throws SQLException{
         bd = new SQLServerDB();
-        String sql="{call PA_CLIENTE_JURIDICO_INSERTAR ("+clienteJuridico.getCed_juridica()+",'"+clienteJuridico.getNombre_Empresa()+"','"
-                +",'"+clienteJuridico.getApellido1()+"','"+",'"+clienteJuridico.getApellido2()+"','"
-                +clienteJuridico.getCodDireccion()+",'"+clienteJuridico.getCod_telefono()+"')}";  
+        String sql="{call PA_CLIENTE_JURIDICO_INSERTAR ("+clienteJuridico.getId_cliente()+","+clienteJuridico.getCed_juridica()+",'"+clienteJuridico.getNombre_Empresa()+"'"
+                + ",'"+clienteJuridico.getNombre_Representante()+"','"+clienteJuridico.getApellido1()+"','"+clienteJuridico.getApellido2()+"','"+clienteJuridico.getCodDireccion()+"'"
+                + ","+clienteJuridico.getCod_telefono()+")}";  
         bd.callStatement(sql);
         bd.closeExecuteQuery();
      }
@@ -143,17 +143,20 @@ public class ClientesDAO {
         String sql= "{call PA_CONSULTAR_TODO_CLIENTE_FISICO()}";
         ResultSet res =bd.executeQuery(sql);
         ArrayList<Cliente_Fisico> a= new ArrayList();
+        
         while(res.next()){
+            
             Cliente_Fisico clienteFisico= new Cliente_Fisico();
             clienteFisico.setCedula(res.getInt("cedula"));
             clienteFisico.setNombre(res.getString("nombre"));
-            clienteFisico.setApellido1(res.getString("apellido paterno"));
-            clienteFisico.setApellido2(res.getString("apellido materno"));
-            clienteFisico.setFec_nacimiento(res.getString("Fecha De Nacimiento"));
+            clienteFisico.setApellido1(res.getString("apellido_paterno"));
+            clienteFisico.setApellido2(res.getString("apellido_materno"));
+            clienteFisico.setFec_nacimiento(res.getString("fec_nacimiento"));
             clienteFisico.setCorreo(res.getString("correo"));
-            clienteFisico.setCodDireccion(res.getString("direccion"));
-            clienteFisico.setCod_telefonos(res.getInt("telefono"));
+            
+            
             a.add(clienteFisico);
+            
         }
         bd.closeExecuteQuery();
         return a;

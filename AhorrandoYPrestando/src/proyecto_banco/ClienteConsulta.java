@@ -6,6 +6,7 @@ package proyecto_banco;
 
 import data.ClientesDAO;
 import domain.Cliente_Fisico;
+import domain.Direcciones;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.Panel;
@@ -53,8 +54,8 @@ public class ClienteConsulta extends javax.swing.JFrame {
         modelo.addColumn("Apellido2");
         modelo.addColumn("Correo");
         modelo.addColumn("Fecha nacimiento");
-        modelo.addColumn("Cod direccion");
-        modelo.addColumn("Cod telefonos");
+        modelo.addColumn("Provincia");
+        modelo.addColumn("Telefono 1");
         
         ClientesDAO clienteDAO = new ClientesDAO();
         lista=clienteDAO.consultarTodoClienteFisico();
@@ -66,8 +67,7 @@ public class ClienteConsulta extends javax.swing.JFrame {
             datos[3]=c.getApellido2();
             datos[4]=c.getCorreo();
             datos[5]=c.getFec_nacimiento();
-            datos[6]=c.getCodDireccion();
-            datos[7]=String.valueOf(c.getCod_telefonos());
+         
             modelo.addRow(datos);
         }
         
