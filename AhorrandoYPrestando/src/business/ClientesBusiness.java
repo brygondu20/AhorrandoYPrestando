@@ -29,7 +29,7 @@ public class ClientesBusiness {
     }
     
     public void agregarCliente(Cliente cliente)throws SQLException, Exception{
-        cliente.setTipo_cliente(clientesDAO.ultimoID());
+       clientesDAO.agregarCliente(cliente);
     }
     
     public void agregarClienteFisico(Cliente_Fisico cliente_Fisico)throws SQLException, Exception{
@@ -42,11 +42,7 @@ public class ClientesBusiness {
     }
     
     public void actualizarClienteFisico(Cliente_Fisico cliente_Fisico)throws SQLException, Exception{
-        if (!(clientesDAO.existeCliente_Fisico(cliente_Fisico))){
-            throw new Exception("El cliente fisico no existe en la base de datos");
-        }else{
-            clientesDAO.actualizarCliente_Fisico(cliente_Fisico);
-        }
+        clientesDAO.actualizarCliente_Fisico(cliente_Fisico);
         
     }
     

@@ -103,7 +103,7 @@ public class ClientesDAO {
         String sql="{call PA_CONSULTAR_CLIENTE_ultimo_id()}";
         ResultSet res =bd.executeQuery(sql);
         while(res.next()){
-            return res.getInt("id_cliente")+1;
+            return res.getInt("id_cliente");
         }
         return 0;
          
@@ -114,7 +114,7 @@ public class ClientesDAO {
      */
     public void actualizarCliente_Fisico(Cliente_Fisico clienteFisico) throws SQLException {
         bd = new SQLServerDB();
-        String sql = " {call PA_MODIFICAR_Cliente_Fisico (" + clienteFisico.getId_cliente() + "," + clienteFisico.getCedula() + ",'" + clienteFisico.getNombre() + "','" + clienteFisico.getApellido1() + "','" + clienteFisico.getApellido2() + "',"
+        String sql = " {call PA_MODIFICAR_Cliente_Fisico (" + clienteFisico.getCedula() + ",'" + clienteFisico.getNombre() + "','" + clienteFisico.getApellido1() + "','" + clienteFisico.getApellido2() + "',"
                 + "'" + clienteFisico.getCodDireccion() + "'," + clienteFisico.getCod_telefonos() + ",'" + clienteFisico.getFec_nacimiento() + "','" + clienteFisico.getCorreo() + "')}";
         bd.callStatement(sql);
         bd.closeExecuteQuery();

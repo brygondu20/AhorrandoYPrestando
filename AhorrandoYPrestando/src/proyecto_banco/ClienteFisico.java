@@ -431,6 +431,7 @@ public class ClienteFisico extends javax.swing.JFrame {
             int año=jDateChooser1.getCalendar().get(Calendar.YEAR);
             String fecha=año+"/"+mes+"/"+dia;
             clienteFisico.setFec_nacimiento(fecha);
+            System.out.println(fecha);
             
             TelefonoBusiness telefonoBusiness = new TelefonoBusiness();
             
@@ -450,9 +451,6 @@ public class ClienteFisico extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido actualizado correctemente ");
             
-            Principal principal = new Principal();
-            principal.setVisible(true);
-            this.dispose();
             
         }catch(Exception ex){
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -494,7 +492,7 @@ public class ClienteFisico extends javax.swing.JFrame {
             txtApellido2.setText(cliente_Fisico.getApellido2().trim());
             txtCorreo.setText(cliente_Fisico.getCorreo().trim());
             //tel1.setText(cliente_Fisico.getCod_telefonos().trim());
-            jDateChooser1.setDateFormatString(cliente_Fisico.getFec_nacimiento().trim());
+            
             codDirrecion = cliente_Fisico.getCodDireccion().trim();
             
         } catch (Exception ex) {
