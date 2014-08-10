@@ -4,6 +4,7 @@
  */
 package proyecto_banco;
 
+import business.CuentasBusiness;
 import data.ClientesDAO;
 import data.CuentasDAO;
 import domain.Cliente_Cuenta;
@@ -51,7 +52,7 @@ public class CuentaAhorro extends javax.swing.JFrame {
         txtMontoDiarioMinimo = new javax.swing.JTextField();
         txtCargoSaldoMinimo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jBActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -139,8 +140,13 @@ public class CuentaAhorro extends javax.swing.JFrame {
         jLabel6.setText("Cargo Saldo Minimo:");
         panelCurves1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, 20));
 
-        jButton4.setText("Actualizar");
-        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
+        jBActualizar.setText("Actualizar");
+        jBActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActualizarActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(jBActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
 
@@ -171,13 +177,12 @@ public class CuentaAhorro extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try {
-            CuentasDAO cuentas= new CuentasDAO();
             
-            Cuenta cuenta= new Cuenta();
-            cuenta.setId_cuenta(cuentas.ultimoId());
+            CuentasBusiness cuentasBusiness = new CuentasBusiness();
+            
+            Cuenta cuenta = new Cuenta();
             cuenta.setTipo_cuenta(1);
-            cuentas.agregarCuenta(cuenta);
-            
+            cuentasBusiness.agregarCuenta(cuenta);
             
             Cuenta_Ahorros cuentaAhorros = new Cuenta_Ahorros();
             cuentaAhorros.setMonto_min(Integer.parseInt(txtMontoDiarioMinimo.getText()));
@@ -189,21 +194,30 @@ public class CuentaAhorro extends javax.swing.JFrame {
             
             cuentaAhorros.setSaldo_actual(Integer.parseInt(txtSaldoActual.getText()));
             cuentaAhorros.setCargo_saldo_min(Integer.parseInt(txtCargoSaldoMinimo.getText()));
-            cuentas.agregarCuenta_ahorros(cuentaAhorros);
+            cuentasBusiness.agregarCuentaAhorro(cuentaAhorros);
             
-            
-            
-            ClientesDAO cliente= new ClientesDAO();
+            ClientesDAO cliente = new ClientesDAO();
             Cliente_Cuenta clienteCuenta= new Cliente_Cuenta();
             int idCliente;
             idCliente = cliente.idClienteFisico(Integer.parseInt(txtCedula.getText()));
             clienteCuenta.setId_cliente(idCliente);
             clienteCuenta.setId_cuenta(cuenta.getId_cuenta());
             cliente.agregarCliente_cuenta(clienteCuenta);
+            
+            //int idCliente;
+            
+            
+            
         }catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jBActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +256,7 @@ public class CuentaAhorro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jBActualizar;
     private javax.swing.JComboBox jCBMoneda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

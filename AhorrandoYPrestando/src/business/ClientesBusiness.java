@@ -9,6 +9,7 @@ package business;
 import data.ClientesDAO;
 import data.TelefonoDAO;
 import domain.Cliente;
+import domain.Cliente_Cuenta;
 import domain.Cliente_Fisico;
 import domain.Cliente_Juridico;
 import domain.Telefonos;
@@ -61,6 +62,10 @@ public class ClientesBusiness {
             clientesDAO.actualizarCliente_Juridico(cliente_Juridico);
         }
         
+    }
+    
+    public void agregarCliente_Cuenta(Cliente_Cuenta  cliente_Cuenta)throws SQLException, Exception{
+       clientesDAO.agregarCliente_cuenta(cliente_Cuenta);
     }
     
 }

@@ -89,40 +89,6 @@ public class ClienteConsulta extends javax.swing.JFrame {
         }
         jTable1.setModel(modelo);
     }
-    
-    /*public  void cargarTabla() throws SQLException{
-        jTable1.setVisible(true);
-        DefaultTableModel modelo =new DefaultTableModel();
-        String datos[]=new String[8];
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Apellido1");
-        modelo.addColumn("Apellido2");
-        modelo.addColumn("Correo");
-        modelo.addColumn("Fecha nacimiento");
-        modelo.addColumn("Provincia");
-        modelo.addColumn("Telefono 1");
-        
-        ClientesDAO clienteDAO = new ClientesDAO();
-        lista=clienteDAO.consultarTodoClienteFisico();
-        
-        for(Cliente_Fisico c:lista){
-            datos[0]=String.valueOf(c.getCedula());
-            datos[1]=c.getNombre();
-            datos[2]=c.getApellido1();
-            datos[3]=c.getApellido2();
-            datos[4]=c.getCorreo();
-            datos[5]=c.getFec_nacimiento();
-         
-            modelo.addRow(datos);
-        }
-        
-        jTable1.setModel(modelo);
-        
-        
-        
-    }*/
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -140,12 +106,12 @@ public class ClienteConsulta extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jBConsultar = new javax.swing.JButton();
         jBBorrar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         buttonAeroRight1 = new org.edisoncor.gui.button.ButtonAeroRight();
+        jComboBoxTipoCliente = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -189,17 +155,12 @@ public class ClienteConsulta extends javax.swing.JFrame {
         });
         panelReflect1.add(jBBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 79, -1));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cedula:");
-        panelReflect1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 20));
-
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCedulaActionPerformed(evt);
             }
         });
-        panelReflect1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 80, 20));
+        panelReflect1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,6 +181,9 @@ public class ClienteConsulta extends javax.swing.JFrame {
             }
         });
         panelReflect1.add(buttonAeroRight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+
+        jComboBoxTipoCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cliente Fisico", "Cliente Juridico" }));
+        panelReflect1.add(jComboBoxTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 100, -1));
 
         panelNice2.add(panelReflect1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 930, 600));
 
@@ -252,7 +216,8 @@ public class ClienteConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jBBorrarActionPerformed
 
     private void jBConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultarActionPerformed
-         SQLServerDB sqlServerDB= new SQLServerDB();
+        
+        SQLServerDB sqlServerDB= new SQLServerDB();
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Cedula");
         modelo.addColumn("Nombre");
@@ -346,7 +311,7 @@ public class ClienteConsulta extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JButton jBBorrar;
     private javax.swing.JButton jBConsultar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox jComboBoxTipoCliente;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;

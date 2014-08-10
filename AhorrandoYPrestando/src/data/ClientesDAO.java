@@ -56,7 +56,6 @@ public class ClientesDAO {
      
      
      
-     
      public void obtenerDatos(Padron padron) throws SQLException{
          bd =new SQLServerDB();
          String sql= "{call PA_CONSULTAR_PADRON('"+padron.getCEDULA()+"')}";

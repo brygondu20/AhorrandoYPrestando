@@ -149,6 +149,7 @@ public class CuentaCorriente extends javax.swing.JFrame {
 
     private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCedulaActionPerformed
 
     private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
