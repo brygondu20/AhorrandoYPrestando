@@ -28,7 +28,7 @@ public class TelefonoDAO {
     
     public void actualizarTelefonos(Telefonos  telefono) throws SQLException{
         bd = new SQLServerDB();
-        String sql="{call    PA_TELEFONOS_ACTUALIZAR('"+telefono.getTelefono1()+"','"+telefono.getTelefono2()+"','"+telefono.getTelefono3()+"','"
+        String sql="{call PA_TELEFONOS_ACTUALIZAR("+telefono.getCod_telefono()+",'"+telefono.getTelefono1()+"','"+telefono.getTelefono2()+"','"+telefono.getTelefono3()+"','"
         +telefono.getCelular1()+"','"+telefono.getCelular2()+"')}";  
         bd.callStatement(sql);
         bd.closeExecuteQuery();
@@ -41,6 +41,21 @@ public class TelefonoDAO {
         while(res.next()){
             telefono.setCod_telefono(res.getInt("cod_telefono"));
         }
+    }
+        
+        
+        public void obtenerDatosTelefonos (Telefonos telefono) throws SQLException{
+         bd =new SQLServerDB();
+         String sql= "{call PA_CONSULTAR_TELEFONO('"+telefono.getCod_telefono()+"')}";
+        ResultSet res =bd.executeQuery(sql);
+         while(res.next()){
+             telefono.setTelefono1(res.getString("telefono1"));
+             telefono.setTelefono2(res.getString("telefono2"));
+             telefono.setTelefono3(res.getString("telefono3"));
+             telefono.setCelular1(res.getString("celular1"));
+             telefono.setCelular2(res.getString("celular2"));
+         }
+    }
          
     }
-}
+

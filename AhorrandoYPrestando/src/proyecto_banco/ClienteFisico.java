@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 public class ClienteFisico extends javax.swing.JFrame {
     private ArrayList <Direcciones>  lista;
     private String codDirrecion;
+    private int codTelefonos;
 
     /**
      * Creates new form CuentaCorriente
@@ -463,13 +464,14 @@ public class ClienteFisico extends javax.swing.JFrame {
             TelefonoBusiness telefonoBusiness = new TelefonoBusiness();
             
             Telefonos telefonos= new Telefonos();
+            telefonos.setCod_telefono(codTelefonos);
             telefonos.setTelefono1(tel1.getText());
             telefonos.setTelefono2(tel2.getText());
             telefonos.setTelefono3(tel3.getText());
             telefonos.setCelular1(cel1.getText());
             telefonos.setCelular2(cel2.getText());
-            telefonoBusiness.agregarTelefonos(telefonos);
             
+            telefonoBusiness.actualizarTelefonos(telefonos);
             clienteFisico.setCod_telefonos(telefonos.getCod_telefono());
             
         try {
@@ -513,6 +515,19 @@ public class ClienteFisico extends javax.swing.JFrame {
             txtApellido2.setText(cliente_Fisico.getApellido2().trim());
             txtCorreo.setText(cliente_Fisico.getCorreo().trim());
             //tel1.setText(cliente_Fisico.getCod_telefonos().trim());
+            
+            codTelefonos=cliente_Fisico.getCod_telefonos();
+            
+            TelefonoDAO telDAO= new TelefonoDAO();
+            Telefonos telefonos= new Telefonos();
+            telefonos.setCod_telefono(codTelefonos);
+            
+            telDAO.obtenerDatosTelefonos(telefonos);
+            tel1.setText(telefonos.getTelefono1());
+            tel2.setText(telefonos.getTelefono2());
+            tel3.setText(telefonos.getTelefono3());
+            cel1.setText(telefonos.getCelular1());
+            cel2.setText(telefonos.getCelular2());
             
             codDirrecion = cliente_Fisico.getCodDireccion().trim();
             

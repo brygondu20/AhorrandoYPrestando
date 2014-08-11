@@ -26,4 +26,11 @@ public class TelefonoBusiness {
         telefonoDAO.agregarTelefonos(telefonos);
         telefonoDAO.codigoTelefono(telefonos);
     }
+    
+    
+    public void actualizarTelefonos(Telefonos telefonos)throws SQLException, Exception{
+        telefonoDAO.actualizarTelefonos(telefonos);
+        
+    }
+    
 }

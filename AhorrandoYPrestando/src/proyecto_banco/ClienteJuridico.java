@@ -8,6 +8,7 @@ import business.ClientesBusiness;
 import business.TelefonoBusiness;
 import data.ClientesDAO;
 import data.DireccionesDAO;
+import data.TelefonoDAO;
 import domain.Cliente;
 import domain.Cliente_Juridico;
 import domain.Direcciones;
@@ -26,6 +27,7 @@ import javax.swing.JOptionPane;
 public class ClienteJuridico extends javax.swing.JFrame {
     private ArrayList <Direcciones>  lista;
     private String codDirrecion;
+    private int codTelefonos;
 
     /**
      * Creates new form CuentaCorriente
@@ -379,8 +381,19 @@ public class ClienteJuridico extends javax.swing.JFrame {
             txtNombre.setText(cliente_Juridico.getNombre_Representante().trim());
             txtApellido1.setText(cliente_Juridico.getApellido1().trim());
             txtApellido2.setText(cliente_Juridico.getApellido2().trim());
+            codTelefonos=cliente_Juridico.getCod_telefono();
             
-            //tel1.setText(cliente_Juridico.getCod_telefonos().trim());
+            TelefonoDAO telDAO= new TelefonoDAO();
+            Telefonos telefonos= new Telefonos();
+            telefonos.setCod_telefono(codTelefonos);
+            
+            telDAO.obtenerDatosTelefonos(telefonos);
+            tel1.setText(telefonos.getTelefono1());
+            tel2.setText(telefonos.getTelefono2());
+            tel3.setText(telefonos.getTelefono3());
+            cel1.setText(telefonos.getCelular1());
+            cel2.setText(telefonos.getCelular2());
+            
             
             codDirrecion = cliente_Juridico.getCodDireccion();
             
@@ -403,14 +416,16 @@ public class ClienteJuridico extends javax.swing.JFrame {
         
         TelefonoBusiness telefonoBusiness = new TelefonoBusiness();
             
+            
             Telefonos telefonos= new Telefonos();
+            telefonos.setCod_telefono(codTelefonos);
             telefonos.setTelefono1(tel1.getText());
             telefonos.setTelefono2(tel2.getText());
             telefonos.setTelefono3(tel3.getText());
             telefonos.setCelular1(cel1.getText());
             telefonos.setCelular2(cel2.getText());
         try {
-            telefonoBusiness.agregarTelefonos(telefonos);
+            telefonoBusiness.actualizarTelefonos(telefonos);
             cliente_Juridico.setCod_telefono(telefonos.getCod_telefono());
             clienteBusniess.actualizarClienteJuridico(cliente_Juridico);
             JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido actualizado correctemente ");
