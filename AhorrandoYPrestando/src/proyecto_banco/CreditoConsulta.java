@@ -4,13 +4,20 @@
  */
 package proyecto_banco;
 
+import connection.SQLServerDB;
+import domain.Credito_Personal;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.Panel;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import org.edisoncor.gui.panel.PanelAvatarChooser;
 
 /**
@@ -18,13 +25,93 @@ import org.edisoncor.gui.panel.PanelAvatarChooser;
  * @author Administrador
  */
 public class CreditoConsulta extends javax.swing.JFrame {
-
+    private  ArrayList<Credito_Personal>lista;
     /**
      * Creates new form Principal
      */
     public CreditoConsulta() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    
+    public void tablaCreditoClienteFisico() throws SQLException{
+        SQLServerDB sqlServerDB= new SQLServerDB();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("cod_credto_personal");
+        modelo.addColumn("monto");
+        modelo.addColumn("moneda");
+        modelo.addColumn("cedula");
+        modelo.addColumn("nombre");
+        modelo.addColumn("apellido_paterno");
+        modelo.addColumn("apellido_materno");
+        modelo.addColumn("id_cuenta");
+        String sql = "{call V_consultar_creditos_cliente_fisico()}";
+        ResultSet res = sqlServerDB.executeQuery(sql);
+        String[] datos = new String[14];
+        lista= new ArrayList();
+        while (res.next()){
+            Credito_Personal creditoPersonal = new Credito_Personal();
+            creditoPersonal.setId_cliente(res.getInt("id_cliente"));
+            lista.add(creditoPersonal);
+            
+            datos[0]= res.getString("cod_credto_personal");
+            datos[1]= res.getString("monto");
+            datos[2]= res.getString("moneda");
+            datos[3]= res.getString("cedula");
+            datos[4]= res.getString("nombre");
+            datos[5]= res.getString("apellido_paterno");
+            datos[6]= res.getString("apellido_materno");
+            datos[7]= res.getString("id_cuenta");
+           
+            
+            modelo.addRow(datos);
+        }
+        jTable1.setModel(modelo);
+    }
+    
+  
+    public void tablaCreditoClienteJuridico(){
+        try {
+            SQLServerDB sqlServerDB= new SQLServerDB();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("cod_credto_personal");
+            modelo.addColumn("monto");
+            modelo.addColumn("moneda");
+            modelo.addColumn("ced_juridica");
+            modelo.addColumn("nombre_Empresa");
+            modelo.addColumn("nombre_Representante");
+            modelo.addColumn("apellido1");
+            modelo.addColumn("apellido2");
+            modelo.addColumn("id_cuenta");
+    
+            String sql = "{call V_consultar_creditos_cliente_juridico()}";
+            ResultSet res = sqlServerDB.executeQuery(sql);
+            String[] datos = new String[14];
+            lista= new ArrayList();
+            while (res.next()){
+                Credito_Personal creditoPersonal = new Credito_Personal();
+                creditoPersonal.setId_cliente(res.getInt("id_cliente"));
+                lista.add(creditoPersonal);
+                    
+                datos[0]= res.getString("cod_credto_personal");
+                datos[1]= res.getString("monto");
+                datos[2]= res.getString("moneda");
+                datos[3]= res.getString("ced_juridica");
+                datos[4]= res.getString("nombre_Empresa");
+                datos[5]= res.getString("nombre_Representante");
+                datos[6]= res.getString("apellido1");
+                datos[7]= res.getString("apellido2");
+                datos[8]= res.getString("id_cuenta");
+                
+                    
+                modelo.addRow(datos);
+                
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreditoConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
        
 
