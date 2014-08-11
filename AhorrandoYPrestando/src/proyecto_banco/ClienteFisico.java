@@ -40,22 +40,52 @@ public class ClienteFisico extends javax.swing.JFrame {
             cargarComboboxCanton();
             cargarComboboxDistrito();
             codigo();
-            txtNombre.setEditable(false);
-            txtApellido1.setEditable(false);
-            txtApellido2.setEditable(false);
-            txtCorreo.setEditable(false);
-            tel1.setEditable(false);
-            tel2.setEditable(false);
-            tel3.setEditable(false);
-            cel1.setEditable(false);
-            cel2.setEditable(false);
-            jDateChooser1.setEnabled(false);
+            bloquearTxt();
             
         } catch (Exception ex) {
             Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    public void limpiar() {
+        txtIdCliente.setText("");
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido1.setText("");
+        txtApellido2.setText("");
+        txtCorreo.setText("");
+        tel1.setText("");
+        tel2.setText("");
+        tel3.setText("");
+        cel1.setText("");
+        cel2.setText("");
+    }
+    
+    public void desbloquearTxt(){
+        txtNombre.setEditable(true);
+        txtApellido1.setEditable(true);
+        txtApellido2.setEditable(true);
+        txtCorreo.setEditable(true);
+        tel1.setEditable(true);
+        tel2.setEditable(true);
+        tel3.setEditable(true);
+        cel1.setEditable(true);
+        cel2.setEditable(true);
+        jDateChooser1.setEnabled(true);
+    };
+    
+    public void bloquearTxt(){
+        txtNombre.setEditable(false);
+        txtApellido1.setEditable(false);
+        txtApellido2.setEditable(false);
+        txtCorreo.setEditable(false);
+        tel1.setEditable(false);
+        tel2.setEditable(false);
+        tel3.setEditable(false);
+        cel1.setEditable(false);
+        cel2.setEditable(false);
+        jDateChooser1.setEnabled(false);
+    };
     
     public void cargarComboboxCanton() throws SQLException, Exception{
         lista=new ArrayList();
@@ -342,6 +372,11 @@ public class ClienteFisico extends javax.swing.JFrame {
             clienteBusniess.agregarClienteFisico(clienteFisico);
             
             JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido agregado correctemente ");
+            
+            limpiar();
+            
+            bloquearTxt();
+            
         }catch(Exception ex){
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -384,16 +419,7 @@ public class ClienteFisico extends javax.swing.JFrame {
          //txtIdCliente.setEditable(false);
         btnActualizar.setEnabled(false);
         
-            txtNombre.setEditable(true);
-            txtApellido1.setEditable(true);
-            txtApellido2.setEditable(true);
-            txtCorreo.setEditable(true);
-            tel1.setEditable(true);
-            tel2.setEditable(true);
-            tel3.setEditable(true);
-            cel1.setEditable(true);
-            cel2.setEditable(true);
-            jDateChooser1.setEnabled(true);
+        desbloquearTxt();
         
         ClientesDAO cli = new ClientesDAO();
         
@@ -406,6 +432,7 @@ public class ClienteFisico extends javax.swing.JFrame {
             txtApellido1.setText(padron.getAPELLIDO_1().trim());
             txtApellido2.setText(padron.getAPELLIDO_2().trim());
             codDirrecion=padron.getCODELEC().trim();
+            
         } catch (Exception ex) {
             Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -451,6 +478,9 @@ public class ClienteFisico extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido actualizado correctemente ");
             
+            limpiar();
+            
+            bloquearTxt();
             
         }catch(Exception ex){
                 JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -467,16 +497,7 @@ public class ClienteFisico extends javax.swing.JFrame {
         
         btnAgregar.setEnabled(false);
         
-            txtNombre.setEditable(true);
-            txtApellido1.setEditable(true);
-            txtApellido2.setEditable(true);
-            txtCorreo.setEditable(true);
-            tel1.setEditable(true);
-            tel2.setEditable(true);
-            tel3.setEditable(true);
-            cel1.setEditable(true);
-            cel2.setEditable(true);
-            jDateChooser1.setEnabled(true);
+        desbloquearTxt();
         
         ClientesDAO cli = new ClientesDAO();
         

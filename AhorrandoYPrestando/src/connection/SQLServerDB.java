@@ -21,7 +21,7 @@ import java.sql.Statement;
 public class SQLServerDB {
     private final String URL= "jdbc:sqlserver://localhost:1433;databaseName=AhorrandoyPrestando;";
     private final String USER="sa";
-    private final String PASS="123456";
+    private final String PASS="b20g11d91";
     private CallableStatement cstmt;
     private Statement stmt;
     private Connection con =null;

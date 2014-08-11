@@ -48,7 +48,7 @@ public class CuentasDAO {
         +cuentacorriente.getPromedio_diario_min()+","+cuentacorriente.getCargo_saldo_min()+")}";
         bd.callStatement(sql);
         bd.closeExecuteQuery();
-     }
+    }
     
     public void actualizarCuenta_corriente(Cuenta_Corriente cuentacorriente) throws SQLException{
         bd = new SQLServerDB();

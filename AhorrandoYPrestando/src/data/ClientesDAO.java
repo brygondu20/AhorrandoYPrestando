@@ -86,7 +86,7 @@ public class ClientesDAO {
      
      public void obtenerDatosClienteJuridico(Cliente_Juridico clienteJuridico) throws SQLException{
         bd =new SQLServerDB();
-        String sql="{call PA_CONSULTAR_CLIENTE_JURIDICO_TODO("+clienteJuridico.getId_cliente()+")}";
+        String sql="{call PA_CONSULTAR_CLIENTE_JURIDICO_TODO("+clienteJuridico.getCed_juridica()+")}";
         ResultSet res =bd.executeQuery(sql);
         while(res.next()){
             clienteJuridico.setNombre_Empresa(res.getString("nombre_empresa"));

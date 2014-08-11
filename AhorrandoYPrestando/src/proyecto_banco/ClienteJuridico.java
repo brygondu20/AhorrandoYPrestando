@@ -42,6 +42,42 @@ public class ClienteJuridico extends javax.swing.JFrame {
         }
     }
 
+    public void limpiar(){
+        txtCedulaJuridica.setText("");
+        txtNombre.setText("");
+        txtApellido1.setText("");
+        txtApellido2.setText("");
+        txtEmpresa.setText("");
+        tel1.setText("");
+        tel2.setText("");
+        tel3.setText("");
+        cel1.setText("");
+        cel2.setText("");
+    };
+    
+    public void desbloquearTxt(){
+        txtNombre.setEditable(true);
+        txtApellido1.setEditable(true);
+        txtApellido2.setEditable(true);
+        txtEmpresa.setEditable(true);
+        tel1.setEditable(true);
+        tel2.setEditable(true);
+        tel3.setEditable(true);
+        cel1.setEditable(true);
+        cel2.setEditable(true);
+    };
+    
+    public void bloquearTxt(){
+        txtNombre.setEditable(false);
+        txtApellido1.setEditable(false);
+        txtApellido2.setEditable(false);
+        txtEmpresa.setEditable(false);
+        tel1.setEditable(false);
+        tel2.setEditable(false);
+        tel3.setEditable(false);
+        cel1.setEditable(false);
+        cel2.setEditable(false);
+    };
     
     public void cargarComboboxCanton() throws SQLException, Exception{
         lista=new ArrayList();
@@ -108,7 +144,6 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        txtIdCliente = new javax.swing.JTextField();
         txtApellido1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -117,7 +152,6 @@ public class ClienteJuridico extends javax.swing.JFrame {
         tel1 = new javax.swing.JTextField();
         tel2 = new javax.swing.JTextField();
         buttonAeroRight1 = new org.edisoncor.gui.button.ButtonAeroRight();
-        jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         tel3 = new javax.swing.JTextField();
         cel2 = new javax.swing.JTextField();
@@ -136,13 +170,13 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cedula Juridica:");
-        panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, 20));
-        panelCurves1.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 120, -1));
+        panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, 20));
+        panelCurves1.add(txtEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 120, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Empresa:");
-        panelCurves1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, 20));
+        panelCurves1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, 20));
         panelCurves1.add(txtApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 100, -1));
 
         btnActualizar.setText("Actualizar");
@@ -172,13 +206,6 @@ public class ClienteJuridico extends javax.swing.JFrame {
         panelCurves1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 20));
         panelCurves1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 100, 20));
 
-        txtIdCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdClienteActionPerformed(evt);
-            }
-        });
-        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 80, 20));
-
         txtApellido1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellido1ActionPerformed(evt);
@@ -201,10 +228,10 @@ public class ClienteJuridico extends javax.swing.JFrame {
                 txtCedulaJuridicaActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtCedulaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 80, -1));
-        panelCurves1.add(cel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 60, -1));
-        panelCurves1.add(tel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 60, -1));
-        panelCurves1.add(tel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 60, -1));
+        panelCurves1.add(txtCedulaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 80, 20));
+        panelCurves1.add(cel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 60, -1));
+        panelCurves1.add(tel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 60, -1));
+        panelCurves1.add(tel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, 60, -1));
 
         buttonAeroRight1.setBackground(new java.awt.Color(102, 102, 102));
         buttonAeroRight1.setText("Regresar");
@@ -215,17 +242,12 @@ public class ClienteJuridico extends javax.swing.JFrame {
         });
         panelCurves1.add(buttonAeroRight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Id Cliente:");
-        panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, 20));
-
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Direcciones:");
         panelCurves1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, 20));
-        panelCurves1.add(tel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 60, -1));
-        panelCurves1.add(cel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, 60, -1));
+        panelCurves1.add(tel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, 60, -1));
+        panelCurves1.add(cel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 190, 60, -1));
 
         jComboBoxProvincias.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "San Jose", "Cartago", "Alajuela", "Guanacaste", "Limon", "Heredia", "Puntarenas" }));
         jComboBoxProvincias.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +276,7 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Telefonos:");
-        panelCurves1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, 20));
+        panelCurves1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, 20));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
 
@@ -266,10 +288,6 @@ public class ClienteJuridico extends javax.swing.JFrame {
     private void txtApellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellido1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellido1ActionPerformed
-
-    private void txtIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdClienteActionPerformed
 
     private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
         // TODO add your handling code here:
@@ -335,7 +353,9 @@ public class ClienteJuridico extends javax.swing.JFrame {
             
             clientesDAO.agregarCliente_juridico(clienteJuridico);
             
-            JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido agregado correctemente ");
+            JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido agregado correctamente ");
+            
+            limpiar();
             
             
         } catch (Exception ex) {
@@ -344,10 +364,13 @@ public class ClienteJuridico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtCedulaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaJuridicaActionPerformed
+        
+        btnAgregar.setEnabled(false);
+        
         ClientesDAO cli = new ClientesDAO();
         
         Cliente_Juridico cliente_Juridico = new Cliente_Juridico();
-        cliente_Juridico.setId_cliente(Integer.parseInt(txtCedulaJuridica.getText()));
+        cliente_Juridico.setCed_juridica(Integer.parseInt(txtCedulaJuridica.getText()));
         
         
         try{
@@ -391,6 +414,11 @@ public class ClienteJuridico extends javax.swing.JFrame {
             cliente_Juridico.setCod_telefono(telefonos.getCod_telefono());
             clienteBusniess.actualizarClienteJuridico(cliente_Juridico);
             JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido actualizado correctemente ");
+            
+            limpiar();
+            
+            btnAgregar.setEnabled(true);
+            
         } catch (Exception ex) {
             Logger.getLogger(ClienteJuridico.class.getName()).log(Level.SEVERE, null, ex);
     }//GEN-LAST:event_btnActualizarActionPerformed
@@ -441,7 +469,6 @@ public class ClienteJuridico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -456,7 +483,6 @@ public class ClienteJuridico extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellido2;
     private javax.swing.JTextField txtCedulaJuridica;
     private javax.swing.JTextField txtEmpresa;
-    private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
