@@ -4,13 +4,21 @@
  */
 package proyecto_banco;
 
+import connection.SQLServerDB;
+import domain.Cuenta_Ahorros;
+import domain.Cuenta_Corriente;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.Panel;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 import org.edisoncor.gui.panel.PanelAvatarChooser;
 
 /**
@@ -18,7 +26,8 @@ import org.edisoncor.gui.panel.PanelAvatarChooser;
  * @author Administrador
  */
 public class CuentaConsulta extends javax.swing.JFrame {
-
+     private  ArrayList<Cuenta_Ahorros>listaA;
+     private  ArrayList<Cuenta_Corriente>listaC;
     /**
      * Creates new form Principal
      */
@@ -26,8 +35,160 @@ public class CuentaConsulta extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-       
-
+   
+    public void tablaCuentaAhorroClienteFisico() throws SQLException{
+        SQLServerDB sqlServerDB= new SQLServerDB();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("id_cuenta");
+        modelo.addColumn("nombre");
+        modelo.addColumn("apellido_paterno");
+        modelo.addColumn("apellido_materno");
+        modelo.addColumn("saldo_actual");
+        modelo.addColumn("moneda");
+        modelo.addColumn("monto_min");
+        modelo.addColumn("cargo_saldo_min");
+        String sql = "{call V_cuenta_ahorros_cliente_fisico()}";
+        ResultSet res = sqlServerDB.executeQuery(sql);
+        String[] datos = new String[14];
+        listaA= new ArrayList();
+        while (res.next()){
+            Cuenta_Ahorros cuentaAhorros = new Cuenta_Ahorros();
+            cuentaAhorros.setId_cuenta(res.getInt("id_cuenta"));
+            listaA.add(cuentaAhorros);
+            
+            datos[0]= res.getString("id_cuenta");
+            datos[1]= res.getString("nombre");
+            datos[2]= res.getString("apellido_paterno");
+            datos[3]= res.getString("apellido_materno");
+            datos[4]= res.getString("saldo_actual");
+            datos[5]= res.getString("moneda");
+            datos[6]= res.getString("monto_min");
+            datos[7]= res.getString("cargo_saldo_min");
+           
+            
+            modelo.addRow(datos);
+        }
+        jTable1.setModel(modelo);
+    }
+    
+    public void tablaCuentaAhorroClienteJuridico(){
+        try {
+            SQLServerDB sqlServerDB= new SQLServerDB();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("id_cuenta");
+            modelo.addColumn("nombre_Empresa");
+            modelo.addColumn("nombre_representante");
+            modelo.addColumn("apellido1");
+            modelo.addColumn("apellido2");
+            modelo.addColumn("saldo_actual");
+            modelo.addColumn("moneda");
+            modelo.addColumn("monto_min");
+            modelo.addColumn("cargo_saldo_min");
+            String sql = "{call V_cuenta_ahorros_cliente_juridico()}";
+            ResultSet res = sqlServerDB.executeQuery(sql);
+            String[] datos = new String[14];
+            listaA= new ArrayList();
+            while (res.next()){
+                Cuenta_Ahorros cuentaAhorros = new Cuenta_Ahorros();
+                cuentaAhorros.setId_cuenta(res.getInt("id_cuenta"));
+                listaA.add(cuentaAhorros);
+                
+                datos[0]= res.getString("id_cuenta");
+                datos[1]= res.getString("nombre_Empresa");
+                datos[2]= res.getString("nombre_representante");
+                datos[3]= res.getString("apellido1");
+                datos[4]= res.getString("apellido2");
+                datos[5]= res.getString("saldo_actual");
+                datos[6]= res.getString("moneda");
+                datos[7]= res.getString("monto_min");
+                datos[8]= res.getString("cargo_saldo_min");
+               
+                    
+                modelo.addRow(datos);
+                
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(CuentaConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void tablaCuentaCorrienteClienteFisico() throws SQLException{
+        SQLServerDB sqlServerDB= new SQLServerDB();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("id_cuenta");
+        modelo.addColumn("nombre");
+        modelo.addColumn("apellido_paterno");
+        modelo.addColumn("apellido_materno");
+        modelo.addColumn("saldo_actual");
+        modelo.addColumn("moneda");
+        modelo.addColumn("promedio_diario_min");
+        modelo.addColumn("cargo_saldo_min");
+        String sql = "{call V_cuenta_corriente_cliente_fisico()}";
+        ResultSet res = sqlServerDB.executeQuery(sql);
+        String[] datos = new String[14];
+        listaC= new ArrayList();
+        while (res.next()){
+            Cuenta_Corriente cuentaCorriente = new Cuenta_Corriente();
+            cuentaCorriente.setCod(res.getInt("cod"));
+            listaC.add(cuentaCorriente);
+            
+            datos[0]= res.getString("id_cuenta");
+            datos[1]= res.getString("nombre");
+            datos[2]= res.getString("apellido_paterno");
+            datos[3]= res.getString("apellido_materno");
+            datos[4]= res.getString("saldo_actual");
+            datos[5]= res.getString("moneda");
+            datos[6]= res.getString("promedio_diario_min");
+            datos[7]= res.getString("cargo_saldo_min");
+           
+            
+            modelo.addRow(datos);
+        }
+        jTable1.setModel(modelo);
+    }
+    
+    public void tablaCuentaCorrienteClienteJuridico(){
+        try {
+            SQLServerDB sqlServerDB= new SQLServerDB();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("id_cuenta");
+            modelo.addColumn("nombre_Empresa");
+            modelo.addColumn("nombre_representante");
+            modelo.addColumn("apellido1");
+            modelo.addColumn("apellido2");
+            modelo.addColumn("saldo_actual");
+            modelo.addColumn("moneda");
+            modelo.addColumn("promedio_diario_min");
+            modelo.addColumn("cargo_saldo_min");
+            String sql = "{call V_cuenta_corriente_cliente_juridico()}";
+            ResultSet res = sqlServerDB.executeQuery(sql);
+            String[] datos = new String[14];
+            listaC= new ArrayList();
+            while (res.next()){
+                Cuenta_Corriente cuentaCorriente = new Cuenta_Corriente();
+                cuentaCorriente.setCod(res.getInt("cod"));
+                listaC.add(cuentaCorriente);
+                
+                datos[0]= res.getString("id_cuenta");
+                datos[1]= res.getString("nombre_Empresa");
+                datos[2]= res.getString("nombre_representante");
+                datos[3]= res.getString("apellido1");
+                datos[4]= res.getString("apellido2");
+                datos[5]= res.getString("saldo_actual");
+                datos[6]= res.getString("moneda");
+                datos[7]= res.getString("promedio_diario_min");
+                datos[8]= res.getString("cargo_saldo_min");
+               
+                    
+                modelo.addRow(datos);
+                
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(CuentaConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
