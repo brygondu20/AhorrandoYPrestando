@@ -136,7 +136,8 @@ public class ClientesDAO {
 
     public void actualizarCliente_Juridico(Cliente_Juridico clienteJuridico) throws SQLException {
         bd = new SQLServerDB();
-        String sql = "{call PA_MODIFICAR_Cliente_Juridico (" + clienteJuridico.getCed_juridica() + ",'" + clienteJuridico.getNombre_Empresa() + "','"
+        String sql = "{call PA_MODIFICAR_Cliente_Juridico (" + clienteJuridico.getCed_juridica() + ",'" + clienteJuridico.getNombre_Empresa() + "'"
+                + ",'" + clienteJuridico.getNombre_Representante()+ "','" + clienteJuridico.getApellido1()+ "','" + clienteJuridico.getApellido2()+ "','"
                 + clienteJuridico.getCodDireccion() + "'," + clienteJuridico.getCod_telefono()+")}";
         bd.callStatement(sql);
         bd.closeExecuteQuery();
