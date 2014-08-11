@@ -97,21 +97,20 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
 
         panelNice5 = new org.edisoncor.gui.panel.PanelNice();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
-        txtIdCliente = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
-        buttonAeroRight1 = new org.edisoncor.gui.button.ButtonAeroRight();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtIdCliente3 = new javax.swing.JTextField();
+        txtTopografia = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jComboBoxProvincias = new javax.swing.JComboBox();
         jComboBoxCanton = new javax.swing.JComboBox();
         jComboBoxDistrito = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(500, 350));
-        setPreferredSize(new java.awt.Dimension(500, 350));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(600, 400));
+        setPreferredSize(new java.awt.Dimension(610, 390));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -119,12 +118,12 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
 
         panelCurves1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtIdCliente.addActionListener(new java.awt.event.ActionListener() {
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdClienteActionPerformed(evt);
+                txtMontoActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 120, -1));
+        panelCurves1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 120, -1));
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,43 +131,34 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 80, -1));
-
-        buttonAeroRight1.setBackground(new java.awt.Color(102, 102, 102));
-        buttonAeroRight1.setText("Regresar");
-        buttonAeroRight1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAeroRight1ActionPerformed(evt);
-            }
-        });
-        panelCurves1.add(buttonAeroRight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+        panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 80, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Compra Casa");
-        panelCurves1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, 20));
+        panelCurves1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Monto:");
-        panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, 20));
+        panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Topografia:");
-        panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, 20));
+        panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, 20));
 
-        txtIdCliente3.addActionListener(new java.awt.event.ActionListener() {
+        txtTopografia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdCliente3ActionPerformed(evt);
+                txtTopografiaActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtIdCliente3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 100, -1));
+        panelCurves1.add(txtTopografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 100, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Direccion:");
-        panelCurves1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, 20));
+        panelCurves1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, 20));
 
         jComboBoxProvincias.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComboBoxProvincias.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "San Jose", "Cartago", "Alajuela", "Guanacaste", "Limon", "Heredia", "Puntarenas" }));
@@ -177,7 +167,7 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
                 jComboBoxProvinciasActionPerformed(evt);
             }
         });
-        panelCurves1.add(jComboBoxProvincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 100, -1));
+        panelCurves1.add(jComboBoxProvincias, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 100, -1));
 
         jComboBoxCanton.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxCanton.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +175,7 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
                 jComboBoxCantonActionPerformed(evt);
             }
         });
-        panelCurves1.add(jComboBoxCanton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 120, -1));
+        panelCurves1.add(jComboBoxCanton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 120, -1));
 
         jComboBoxDistrito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxDistrito.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +183,7 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
                 jComboBoxDistritoActionPerformed(evt);
             }
         });
-        panelCurves1.add(jComboBoxDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 110, -1));
+        panelCurves1.add(jComboBoxDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 120, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 390));
 
@@ -202,24 +192,17 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
-        // TODO add your handling code here:
-        Principal principal = new Principal();
-        principal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_buttonAeroRight1ActionPerformed
-
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void txtIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdClienteActionPerformed
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
 
-    }//GEN-LAST:event_txtIdClienteActionPerformed
+    }//GEN-LAST:event_txtMontoActionPerformed
 
-    private void txtIdCliente3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCliente3ActionPerformed
+    private void txtTopografiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTopografiaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdCliente3ActionPerformed
+    }//GEN-LAST:event_txtTopografiaActionPerformed
 
     private void jComboBoxProvinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxProvinciasActionPerformed
         try {
@@ -283,7 +266,6 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JComboBox jComboBoxCanton;
     private javax.swing.JComboBox jComboBoxDistrito;
     private javax.swing.JComboBox jComboBoxProvincias;
@@ -293,7 +275,7 @@ public class CreditoHipotecarioCompraCasa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
-    private javax.swing.JTextField txtIdCliente;
-    private javax.swing.JTextField txtIdCliente3;
+    private javax.swing.JTextField txtMonto;
+    private javax.swing.JTextField txtTopografia;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,13 +17,13 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Administrador
  */
-public class CreditoHipotecarioCompraLote extends javax.swing.JFrame {
+public class CreditoPrendarioVehiculoUsado extends javax.swing.JFrame {
      private ArrayList <Cliente_Cuenta>  lista;
 
     /**
      * Creates new form CuentaCorriente
      */
-    public CreditoHipotecarioCompraLote() {
+    public CreditoPrendarioVehiculoUsado() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -40,17 +40,15 @@ public class CreditoHipotecarioCompraLote extends javax.swing.JFrame {
 
         panelNice5 = new org.edisoncor.gui.panel.PanelNice();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
-        txtCodPrestamoLote = new javax.swing.JTextField();
+        txtPlaca = new javax.swing.JTextField();
         txtMonto = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtTopografia = new javax.swing.JTextField();
-        txtDireccion = new javax.swing.JTextField();
+        txtIPlazo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 400));
@@ -61,19 +59,19 @@ public class CreditoHipotecarioCompraLote extends javax.swing.JFrame {
 
         panelCurves1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodPrestamoLote.addActionListener(new java.awt.event.ActionListener() {
+        txtPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodPrestamoLoteActionPerformed(evt);
+                txtPlacaActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtCodPrestamoLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 100, -1));
+        panelCurves1.add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 100, -1));
 
         txtMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMontoActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 120, -1));
+        panelCurves1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 120, -1));
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,49 +79,37 @@ public class CreditoHipotecarioCompraLote extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 80, -1));
+        panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 80, -1));
 
         btnActualizar.setText("Actualizar");
-        panelCurves1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
+        panelCurves1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Compra Lote");
+        jLabel6.setText("Vehiculo Usado");
         panelCurves1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, -1, 20));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Direccion:");
-        panelCurves1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, -1, 20));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Codigo prestamo lote:");
-        panelCurves1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, 20));
+        jLabel1.setText("Placa:");
+        panelCurves1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Monto:");
-        panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, 20));
+        panelCurves1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Topografia:");
-        panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, 20));
+        jLabel3.setText("Plazo:");
+        panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, 20));
 
-        txtTopografia.addActionListener(new java.awt.event.ActionListener() {
+        txtIPlazo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTopografiaActionPerformed(evt);
+                txtIPlazoActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtTopografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 100, -1));
-
-        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDireccionActionPerformed(evt);
-            }
-        });
-        panelCurves1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 120, -1));
+        panelCurves1.add(txtIPlazo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 100, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 390));
 
@@ -132,9 +118,9 @@ public class CreditoHipotecarioCompraLote extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCodPrestamoLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodPrestamoLoteActionPerformed
+    private void txtPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodPrestamoLoteActionPerformed
+    }//GEN-LAST:event_txtPlacaActionPerformed
 
     private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
         
@@ -145,13 +131,9 @@ public class CreditoHipotecarioCompraLote extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void txtTopografiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTopografiaActionPerformed
+    private void txtIPlazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIPlazoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTopografiaActionPerformed
-
-    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDireccionActionPerformed
+    }//GEN-LAST:event_txtIPlazoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,20 +152,20 @@ public class CreditoHipotecarioCompraLote extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreditoHipotecarioCompraLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreditoPrendarioVehiculoUsado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreditoHipotecarioCompraLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreditoPrendarioVehiculoUsado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreditoHipotecarioCompraLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreditoPrendarioVehiculoUsado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreditoHipotecarioCompraLote.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreditoPrendarioVehiculoUsado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreditoHipotecarioCompraLote().setVisible(true);
+                new CreditoPrendarioVehiculoUsado().setVisible(true);
             }
         });
     }
@@ -191,15 +173,13 @@ public class CreditoHipotecarioCompraLote extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
-    private javax.swing.JTextField txtCodPrestamoLote;
-    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtIPlazo;
     private javax.swing.JTextField txtMonto;
-    private javax.swing.JTextField txtTopografia;
+    private javax.swing.JTextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }

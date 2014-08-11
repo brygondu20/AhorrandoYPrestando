@@ -47,8 +47,8 @@ public class CuentasBusiness {
         cuentasDAO.agregarCuenta_ahorros(cuenta_Ahorros);
     }
     
-    public void actualizarCuentaCorriente(Cuenta_Ahorros cuenta_Ahorros)throws SQLException, Exception{
-        cuentasDAO.agregarCuenta_ahorros(cuenta_Ahorros);
+    public void actualizarCuentaAhorro(Cuenta_Ahorros cuenta_Ahorros)throws SQLException, Exception{
+        cuentasDAO.actualizarCuenta_ahorros(cuenta_Ahorros);
     }
         
     

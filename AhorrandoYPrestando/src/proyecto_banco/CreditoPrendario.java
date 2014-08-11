@@ -56,8 +56,8 @@ public class CreditoPrendario extends javax.swing.JFrame {
                 txtCodigoCreditoActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtCodigoCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 100, -1));
-        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 100, -1));
+        panelCurves1.add(txtCodigoCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 100, -1));
+        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 100, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "$ Dolar", "₡ Colón" }));
         panelCurves1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 130, -1));
@@ -68,7 +68,7 @@ public class CreditoPrendario extends javax.swing.JFrame {
                 jComboBoxPropositoActionPerformed(evt);
             }
         });
-        panelCurves1.add(jComboBoxProposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 100, -1));
+        panelCurves1.add(jComboBoxProposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 130, -1));
         panelCurves1.add(txtComision, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 130, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -114,7 +114,7 @@ public class CreditoPrendario extends javax.swing.JFrame {
         panelCurves1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 80, -1));
 
         jButton4.setText("Actualizar");
-        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 270, -1, -1));
+        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
 
@@ -139,14 +139,13 @@ public class CreditoPrendario extends javax.swing.JFrame {
         int proposito = jComboBoxProposito.getSelectedIndex();
         switch(proposito){
             case 0:
-                
+                CreditoPrendarioVehiculoNuevo creditoPrendarioVehiculoNuevo = new CreditoPrendarioVehiculoNuevo();
+                creditoPrendarioVehiculoNuevo.setVisible(true);
             break;
             case 1:
-            
-            break;
-            case 2:
-            
-            break;    
+                CreditoPrendarioVehiculoUsado creditoPrendarioVehiculoUsado = new CreditoPrendarioVehiculoUsado();
+                creditoPrendarioVehiculoUsado.setVisible(true);
+            break;  
         }
     }//GEN-LAST:event_jComboBoxPropositoActionPerformed
 

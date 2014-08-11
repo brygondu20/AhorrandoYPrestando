@@ -4,11 +4,15 @@
  */
 package proyecto_banco;
 
+import business.CuentasBusiness;
 import data.ClientesDAO;
 import data.CuentasDAO;
 import domain.Cliente_Cuenta;
 import domain.Cuenta;
+import domain.Cuenta_Ahorros;
 import domain.Cuenta_Corriente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +28,14 @@ public class CuentaCorriente extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    public void limpiar() {
+        txtCedula.setText("");
+        txtIdCuenta.setText("");
+        txtSaldoActual.setText("");
+        txtCargoSaldoMinimo.setText("");
+        txtMontoDiarioMinimo.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,12 +50,12 @@ public class CuentaCorriente extends javax.swing.JFrame {
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
         buttonAeroRight1 = new org.edisoncor.gui.button.ButtonAeroRight();
         btnAgregar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtIdCliente = new javax.swing.JTextField();
+        txtIdCuenta = new javax.swing.JTextField();
         txtSaldoActual = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -78,8 +90,13 @@ public class CuentaCorriente extends javax.swing.JFrame {
         });
         panelCurves1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 80, -1));
 
-        jButton4.setText("Actualizar");
-        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,7 +119,13 @@ public class CuentaCorriente extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("ID cuenta:");
         panelCurves1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, 20));
-        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 90, -1));
+
+        txtIdCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCuentaActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(txtIdCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 90, -1));
 
         txtSaldoActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +157,12 @@ public class CuentaCorriente extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Cargo Saldo Minimo:");
         panelCurves1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, 20));
+
+        txtCargoSaldoMinimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCargoSaldoMinimoActionPerformed(evt);
+            }
+        });
         panelCurves1.add(txtCargoSaldoMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 110, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 450));
@@ -189,10 +218,60 @@ public class CuentaCorriente extends javax.swing.JFrame {
             clienteCuenta.setId_cliente(idCliente);
             clienteCuenta.setId_cuenta(cuenta.getId_cuenta());
             cliente.agregarCliente_cuenta(clienteCuenta);
+            
+            JOptionPane.showMessageDialog(panelCurves1, "La cuenta ha sido agregado correctemente ");
+            
+            limpiar();
+            
         }catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+        try {       
+            
+           CuentasBusiness cuentasBusniess = new CuentasBusiness();
+           
+           Cuenta_Corriente cuentaCorriente = new Cuenta_Corriente();
+         
+            cuentaCorriente.setCod(Integer.parseInt(txtIdCuenta.getText()));
+            cuentaCorriente.setSaldo_actual(Integer.parseInt(txtSaldoActual.getText()));
+            
+            if(jCBMoneda.getSelectedItem() == "$ Dolar"){
+                cuentaCorriente.setMoneda(2);
+            }else{
+                cuentaCorriente.setMoneda(1);
+            }
+            
+            cuentaCorriente.setPromedio_diario_min(Integer.parseInt(txtMontoDiarioMinimo.getText()));
+            cuentaCorriente.setCargo_saldo_min(Integer.parseInt(txtCargoSaldoMinimo.getText()));
+         
+            try {
+             
+                cuentasBusniess.actualizarCuentaCorriente(cuentaCorriente);
+
+                JOptionPane.showMessageDialog(panelCurves1, "La cuenta ha sido actualizado correctemente ");
+            
+        }catch(Exception ex){
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        }   catch (Exception ex) {
+            Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void txtIdCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCuentaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtIdCuentaActionPerformed
+
+    private void txtCargoSaldoMinimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargoSaldoMinimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCargoSaldoMinimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,9 +308,9 @@ public class CuentaCorriente extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jCBMoneda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -244,7 +323,7 @@ public class CuentaCorriente extends javax.swing.JFrame {
     private org.edisoncor.gui.panel.PanelNice panelNice5;
     private javax.swing.JTextField txtCargoSaldoMinimo;
     private javax.swing.JTextField txtCedula;
-    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtIdCuenta;
     private javax.swing.JTextField txtMontoDiarioMinimo;
     private javax.swing.JTextField txtSaldoActual;
     // End of variables declaration//GEN-END:variables

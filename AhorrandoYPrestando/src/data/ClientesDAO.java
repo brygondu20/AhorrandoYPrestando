@@ -111,6 +111,17 @@ public class ClientesDAO {
          
      }
      
+     public int idClienteJuridico(int cedula) throws SQLException{
+        bd =new SQLServerDB();
+        String sql="{call PA_CONSULTAR_CLIENTE_JURIDICO_id_cliente("+cedula+")}";
+        ResultSet res =bd.executeQuery(sql);
+        while(res.next()){
+            return res.getInt("id_cliente");
+        }
+        return 0;
+         
+     }
+     
      
      public int ultimoID() throws SQLException{
         bd = new SQLServerDB();

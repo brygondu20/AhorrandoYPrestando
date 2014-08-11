@@ -40,22 +40,21 @@ public class CreditoHipotecarioHipotecaCasa extends javax.swing.JFrame {
 
         panelNice5 = new org.edisoncor.gui.panel.PanelNice();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
-        txtCodCredito = new javax.swing.JTextField();
-        txtIdCliente = new javax.swing.JTextField();
+        txtCodHipotecaCasa = new javax.swing.JTextField();
+        txtMonto = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
-        buttonAeroRight1 = new org.edisoncor.gui.button.ButtonAeroRight();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtIdCliente1 = new javax.swing.JTextField();
-        txtIdCliente2 = new javax.swing.JTextField();
+        txtTopografia = new javax.swing.JTextField();
+        txtUbicacion = new javax.swing.JTextField();
         jComboBoxProposito = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 400));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,19 +63,19 @@ public class CreditoHipotecarioHipotecaCasa extends javax.swing.JFrame {
 
         panelCurves1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtCodCredito.addActionListener(new java.awt.event.ActionListener() {
+        txtCodHipotecaCasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodCreditoActionPerformed(evt);
+                txtCodHipotecaCasaActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtCodCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 100, -1));
+        panelCurves1.add(txtCodHipotecaCasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 100, -1));
 
-        txtIdCliente.addActionListener(new java.awt.event.ActionListener() {
+        txtMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdClienteActionPerformed(evt);
+                txtMontoActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 120, -1));
+        panelCurves1.add(txtMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 120, -1));
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,15 +87,6 @@ public class CreditoHipotecarioHipotecaCasa extends javax.swing.JFrame {
 
         btnActualizar.setText("Actualizar");
         panelCurves1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
-
-        buttonAeroRight1.setBackground(new java.awt.Color(102, 102, 102));
-        buttonAeroRight1.setText("Regresar");
-        buttonAeroRight1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAeroRight1ActionPerformed(evt);
-            }
-        });
-        panelCurves1.add(buttonAeroRight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,19 +113,19 @@ public class CreditoHipotecarioHipotecaCasa extends javax.swing.JFrame {
         jLabel3.setText("Proposito");
         panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, 20));
 
-        txtIdCliente1.addActionListener(new java.awt.event.ActionListener() {
+        txtTopografia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdCliente1ActionPerformed(evt);
+                txtTopografiaActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtIdCliente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 100, -1));
+        panelCurves1.add(txtTopografia, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 100, -1));
 
-        txtIdCliente2.addActionListener(new java.awt.event.ActionListener() {
+        txtUbicacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdCliente2ActionPerformed(evt);
+                txtUbicacionActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtIdCliente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 120, -1));
+        panelCurves1.add(txtUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 120, -1));
 
         jComboBoxProposito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compra de terreno", "Remodelaciones", "Capital para su negocio", "Disminuir" }));
         jComboBoxProposito.addActionListener(new java.awt.event.ActionListener() {
@@ -157,33 +147,26 @@ public class CreditoHipotecarioHipotecaCasa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCodCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodCreditoActionPerformed
+    private void txtCodHipotecaCasaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodHipotecaCasaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodCreditoActionPerformed
+    }//GEN-LAST:event_txtCodHipotecaCasaActionPerformed
 
-    private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
-        // TODO add your handling code here:
-        Principal principal = new Principal();
-        principal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_buttonAeroRight1ActionPerformed
-
-    private void txtIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdClienteActionPerformed
+    private void txtMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontoActionPerformed
         
-    }//GEN-LAST:event_txtIdClienteActionPerformed
+    }//GEN-LAST:event_txtMontoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void txtIdCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCliente1ActionPerformed
+    private void txtTopografiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTopografiaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdCliente1ActionPerformed
+    }//GEN-LAST:event_txtTopografiaActionPerformed
 
-    private void txtIdCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCliente2ActionPerformed
+    private void txtUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUbicacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdCliente2ActionPerformed
+    }//GEN-LAST:event_txtUbicacionActionPerformed
 
     private void jComboBoxPropositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPropositoActionPerformed
         // TODO add your handling code here:
@@ -227,7 +210,6 @@ public class CreditoHipotecarioHipotecaCasa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
-    private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JComboBox jComboBoxProposito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -237,9 +219,9 @@ public class CreditoHipotecarioHipotecaCasa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
-    private javax.swing.JTextField txtCodCredito;
-    private javax.swing.JTextField txtIdCliente;
-    private javax.swing.JTextField txtIdCliente1;
-    private javax.swing.JTextField txtIdCliente2;
+    private javax.swing.JTextField txtCodHipotecaCasa;
+    private javax.swing.JTextField txtMonto;
+    private javax.swing.JTextField txtTopografia;
+    private javax.swing.JTextField txtUbicacion;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,7 +35,7 @@ public class CuentasDAO {
     
     public void actualizarCuenta_ahorros(Cuenta_Ahorros cuentaahorros) throws SQLException{
         bd = new SQLServerDB();
-        String sql=" {call PA_CUENTA_AHORRO_ACTUALIZAR ("+cuentaahorros.getSaldo_actual()+","+cuentaahorros.getMoneda()+","
+        String sql=" {call PA_CUENTA_AHORRO_ACTUALIZAR ("+cuentaahorros.getId_cuenta()+","+cuentaahorros.getSaldo_actual()+","+cuentaahorros.getMoneda()+","
                 +cuentaahorros.getMonto_min()+","+cuentaahorros.getCargo_saldo_min()+")}";
         bd.callStatement(sql);
         bd.closeExecuteQuery();
@@ -52,7 +52,7 @@ public class CuentasDAO {
     
     public void actualizarCuenta_corriente(Cuenta_Corriente cuentacorriente) throws SQLException{
         bd = new SQLServerDB();
-        String sql=" {call PA_CUENTA_CORRIENTE_ACTUALIZAR ("+cuentacorriente.getSaldo_actual()+","+cuentacorriente.getMoneda()+","
+        String sql=" {call PA_CUENTA_CORRIENTE_ACTUALIZAR ("+cuentacorriente.getCod()+","+cuentacorriente.getSaldo_actual()+","+cuentacorriente.getMoneda()+","
         +cuentacorriente.getPromedio_diario_min()+","+cuentacorriente.getCargo_saldo_min()+")}";
         bd.callStatement(sql);
         bd.closeExecuteQuery();

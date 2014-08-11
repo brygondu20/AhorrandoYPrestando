@@ -29,13 +29,13 @@ public class CreditoHipotecario extends javax.swing.JFrame {
 
         panelNice5 = new org.edisoncor.gui.panel.PanelNice();
         panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtIdCuenta = new javax.swing.JTextField();
+        txtCodCredito = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtValorPropiedad = new javax.swing.JTextField();
         jComboBoxProposito = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -50,14 +50,14 @@ public class CreditoHipotecario extends javax.swing.JFrame {
         panelNice5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelCurves1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelCurves1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 100, -1));
+        panelCurves1.add(txtIdCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 100, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtCodCredito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtCodCreditoActionPerformed(evt);
             }
         });
-        panelCurves1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 100, -1));
+        panelCurves1.add(txtCodCredito, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -78,7 +78,7 @@ public class CreditoHipotecario extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Valor Propiedad:");
         panelCurves1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, 20));
-        panelCurves1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 130, -1));
+        panelCurves1.add(txtValorPropiedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 170, 130, -1));
 
         jComboBoxProposito.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compra Casa", "Compra Lote", "Hipoteca Casa" }));
         jComboBoxProposito.addActionListener(new java.awt.event.ActionListener() {
@@ -123,9 +123,9 @@ public class CreditoHipotecario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtCodCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodCreditoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtCodCreditoActionPerformed
 
     private void buttonAeroRight1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAeroRight1ActionPerformed
         // TODO add your handling code here:
@@ -199,10 +199,10 @@ public class CreditoHipotecario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField5;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
+    private javax.swing.JTextField txtCodCredito;
+    private javax.swing.JTextField txtIdCuenta;
+    private javax.swing.JTextField txtValorPropiedad;
     // End of variables declaration//GEN-END:variables
 }
