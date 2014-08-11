@@ -64,6 +64,8 @@ public class CuentaCorriente extends javax.swing.JFrame {
         txtMontoDiarioMinimo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCargoSaldoMinimo = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jCBTipoCliente = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -132,11 +134,11 @@ public class CuentaCorriente extends javax.swing.JFrame {
                 txtSaldoActualActionPerformed(evt);
             }
         });
-        panelCurves1.add(txtSaldoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 90, -1));
+        panelCurves1.add(txtSaldoActual, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 90, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Saldo Actual:");
+        jLabel3.setText("Tipo cliente");
         panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -164,6 +166,14 @@ public class CuentaCorriente extends javax.swing.JFrame {
             }
         });
         panelCurves1.add(txtCargoSaldoMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 110, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Saldo Actual:");
+        panelCurves1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, 20));
+
+        jCBTipoCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "fisico", "Juridico" }));
+        panelCurves1.add(jCBTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 90, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 450));
 
@@ -211,10 +221,17 @@ public class CuentaCorriente extends javax.swing.JFrame {
             cuentas.agregarCuenta_corriente(cuentaCorriente);
             
             
-            
             ClientesDAO cliente= new ClientesDAO();
+            int tipoCliente = jCBTipoCliente.getSelectedIndex();
+            int idCliente;
+            if(tipoCliente == 0){
+                idCliente = cliente.idClienteFisico(Integer.parseInt(txtCedula.getText()));
+            }else{
+                idCliente = cliente.idClienteJuridico(Integer.parseInt(txtCedula.getText()));
+            }
+            
             Cliente_Cuenta clienteCuenta= new Cliente_Cuenta();
-            int idCliente=cliente.idClienteFisico(Integer.parseInt(txtCedula.getText()));
+            
             clienteCuenta.setId_cliente(idCliente);
             clienteCuenta.setId_cuenta(cuenta.getId_cuenta());
             cliente.agregarCliente_cuenta(clienteCuenta);
@@ -312,6 +329,7 @@ public class CuentaCorriente extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JComboBox jCBMoneda;
+    private javax.swing.JComboBox jCBTipoCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -319,6 +337,7 @@ public class CuentaCorriente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private org.edisoncor.gui.panel.PanelCurves panelCurves1;
     private org.edisoncor.gui.panel.PanelNice panelNice5;
     private javax.swing.JTextField txtCargoSaldoMinimo;

@@ -203,12 +203,12 @@ public class CuentaAhorro extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try {
+            CuentasDAO cuentas= new CuentasDAO();
             
-            CuentasBusiness cuentasBusiness = new CuentasBusiness();
-            
-            Cuenta cuenta = new Cuenta();
+            Cuenta cuenta= new Cuenta();
+            cuenta.setId_cuenta(cuentas.ultimoIdAhorros());
             cuenta.setTipo_cuenta(1);
-            cuentasBusiness.agregarCuenta(cuenta);
+            cuentas.agregarCuenta(cuenta);
             
             Cuenta_Ahorros cuentaAhorros = new Cuenta_Ahorros();
             cuentaAhorros.setMonto_min(Integer.parseInt(txtMontoDiarioMinimo.getText()));
@@ -220,19 +220,19 @@ public class CuentaAhorro extends javax.swing.JFrame {
             
             cuentaAhorros.setSaldo_actual(Integer.parseInt(txtSaldoActual.getText()));
             cuentaAhorros.setCargo_saldo_min(Integer.parseInt(txtCargoSaldoMinimo.getText()));
-            cuentasBusiness.agregarCuentaAhorro(cuentaAhorros);
+            cuentas.agregarCuenta_ahorros(cuentaAhorros);
             
-            ClientesDAO cliente = new ClientesDAO();
-            Cliente_Cuenta clienteCuenta= new Cliente_Cuenta();
-            int idCliente;
-            
+            ClientesDAO cliente= new ClientesDAO();
             int tipoCliente = jCBTipoCliente.getSelectedIndex();
-                
+            int idCliente;
             if(tipoCliente == 0){
                 idCliente = cliente.idClienteFisico(Integer.parseInt(txtCedula.getText()));
             }else{
                 idCliente = cliente.idClienteJuridico(Integer.parseInt(txtCedula.getText()));
             }
+            
+            Cliente_Cuenta clienteCuenta= new Cliente_Cuenta();
+            
             clienteCuenta.setId_cliente(idCliente);
             clienteCuenta.setId_cuenta(cuenta.getId_cuenta());
             
