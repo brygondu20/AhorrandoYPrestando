@@ -29,8 +29,7 @@ public class CreditosDAO {
      
     public void agregarCredito_personal (Credito_Personal  creditopersonal) throws SQLException{
         bd = new SQLServerDB();
-        String sql="{call    PA_CREDITO_PERSONAL_INSERTAR ("+creditopersonal.getMonto()+","+creditopersonal.getMoneda()+","+creditopersonal.getId_cliente()+","
-                +creditopersonal.getId_cuenta()+")}";  
+        String sql="{call PA_CREDITO_PERSONAL_INSERTAR ("+creditopersonal.getMoneda()+","+creditopersonal.getMonto()+","+creditopersonal.getId_cliente()+","+creditopersonal.getId_cuenta()+")}";  
         bd.callStatement(sql);
         bd.closeExecuteQuery();
      }       
