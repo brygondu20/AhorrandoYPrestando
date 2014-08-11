@@ -28,13 +28,47 @@ import org.edisoncor.gui.panel.PanelAvatarChooser;
 public class CuentaConsulta extends javax.swing.JFrame {
      private  ArrayList<Cuenta_Ahorros>listaA;
      private  ArrayList<Cuenta_Corriente>listaC;
+     int tipoCuenta=1;
+     int tipoCliente=1;
+     
+     
     /**
      * Creates new form Principal
      */
     public CuentaConsulta() {
         initComponents();
+        cargarTabla();
         this.setLocationRelativeTo(null);
     }
+    
+    public void cargarTabla(){
+        try{
+            if(jComboBoxTipoCuenta.getSelectedIndex()==0 && jComboBoxTipoCliente.getSelectedIndex()==0){
+                tipoCuenta=1;
+                tipoCliente=1;
+                tablaCuentaAhorroClienteFisico();
+            }else{
+                if(jComboBoxTipoCuenta.getSelectedIndex()==0 && jComboBoxTipoCliente.getSelectedIndex()==1){
+                    tipoCuenta=1;
+                    tipoCliente=2;
+                    tablaCuentaAhorroClienteJuridico();
+                }else{
+                    if(jComboBoxTipoCuenta.getSelectedIndex()==1 && jComboBoxTipoCliente.getSelectedIndex()==0){
+                        tipoCuenta=2;
+                        tipoCliente=1;
+                        tablaCuentaCorrienteClienteFisico();
+                    }else{
+                        tipoCuenta=2;
+                        tipoCliente=2;
+                        tablaCuentaCorrienteClienteJuridico();
+                    }
+                }
+            }
+            }catch (SQLException ex) {
+                    Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }
+    
    
     public void tablaCuentaAhorroClienteFisico() throws SQLException{
         SQLServerDB sqlServerDB= new SQLServerDB();
@@ -130,7 +164,7 @@ public class CuentaConsulta extends javax.swing.JFrame {
         listaC= new ArrayList();
         while (res.next()){
             Cuenta_Corriente cuentaCorriente = new Cuenta_Corriente();
-            cuentaCorriente.setCod(res.getInt("cod"));
+            cuentaCorriente.setCod(res.getInt("id_cuenta"));
             listaC.add(cuentaCorriente);
             
             datos[0]= res.getString("id_cuenta");
@@ -167,7 +201,7 @@ public class CuentaConsulta extends javax.swing.JFrame {
             listaC= new ArrayList();
             while (res.next()){
                 Cuenta_Corriente cuentaCorriente = new Cuenta_Corriente();
-                cuentaCorriente.setCod(res.getInt("cod"));
+                cuentaCorriente.setCod(res.getInt("id_cuenta"));
                 listaC.add(cuentaCorriente);
                 
                 datos[0]= res.getString("id_cuenta");
@@ -212,6 +246,8 @@ public class CuentaConsulta extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         buttonAeroRight1 = new org.edisoncor.gui.button.ButtonAeroRight();
+        jComboBoxTipoCuenta = new javax.swing.JComboBox();
+        jComboBoxTipoCliente = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -277,6 +313,22 @@ public class CuentaConsulta extends javax.swing.JFrame {
         });
         panelReflect1.add(buttonAeroRight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
 
+        jComboBoxTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "cuenta ahorro", "cuenta corriente" }));
+        jComboBoxTipoCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoCuentaActionPerformed(evt);
+            }
+        });
+        panelReflect1.add(jComboBoxTipoCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, -1, -1));
+
+        jComboBoxTipoCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "cliente fisico", "cliente juridico" }));
+        jComboBoxTipoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoClienteActionPerformed(evt);
+            }
+        });
+        panelReflect1.add(jComboBoxTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
+
         panelNice2.add(panelReflect1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 930, 600));
 
         getContentPane().add(panelNice2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 940, 620));
@@ -294,8 +346,64 @@ public class CuentaConsulta extends javax.swing.JFrame {
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
+
+    private void jComboBoxTipoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoClienteActionPerformed
+        try{
+            if(jComboBoxTipoCuenta.getSelectedIndex()==0 && jComboBoxTipoCliente.getSelectedIndex()==0){
+                tipoCuenta=1;
+                tipoCliente=1;
+                tablaCuentaAhorroClienteFisico();
+            }else{
+                if(jComboBoxTipoCuenta.getSelectedIndex()==0 && jComboBoxTipoCliente.getSelectedIndex()==1){
+                    tipoCuenta=1;
+                    tipoCliente=2;
+                    tablaCuentaAhorroClienteJuridico();
+                }else{
+                    if(jComboBoxTipoCuenta.getSelectedIndex()==1 && jComboBoxTipoCliente.getSelectedIndex()==0){
+                        tipoCuenta=2;
+                        tipoCliente=1;
+                        tablaCuentaCorrienteClienteFisico();
+                    }else{
+                        tipoCuenta=2;
+                        tipoCliente=2;
+                        tablaCuentaCorrienteClienteJuridico();
+                    }
+                }
+            }
+            }catch (SQLException ex) {
+                    Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
+                }
     
-    
+    }//GEN-LAST:event_jComboBoxTipoClienteActionPerformed
+
+    private void jComboBoxTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoCuentaActionPerformed
+        try{
+            if(jComboBoxTipoCuenta.getSelectedIndex()==0 && jComboBoxTipoCliente.getSelectedIndex()==0){
+                tipoCuenta=1;
+                tipoCliente=1;
+                tablaCuentaAhorroClienteFisico();
+            }else{
+                if(jComboBoxTipoCuenta.getSelectedIndex()==0 && jComboBoxTipoCliente.getSelectedIndex()==1){
+                    tipoCuenta=1;
+                    tipoCliente=2;
+                    tablaCuentaAhorroClienteJuridico();
+                }else{
+                    if(jComboBoxTipoCuenta.getSelectedIndex()==1 && jComboBoxTipoCliente.getSelectedIndex()==0){
+                        tipoCuenta=2;
+                        tipoCliente=1;
+                        tablaCuentaCorrienteClienteFisico();
+                    }else{
+                        tipoCuenta=2;
+                        tipoCliente=2;
+                        tablaCuentaCorrienteClienteJuridico();
+                    }
+                }
+            }
+            }catch (SQLException ex) {
+                    Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
+                }
+    }//GEN-LAST:event_jComboBoxTipoCuentaActionPerformed
+     
     /**
      * @param args the command line arguments
      */
@@ -334,6 +442,8 @@ public class CuentaConsulta extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBoxTipoCliente;
+    private javax.swing.JComboBox jComboBoxTipoCuenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
