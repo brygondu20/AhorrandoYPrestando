@@ -6,6 +6,8 @@ package proyecto_banco;
 
 import connection.SQLServerDB;
 import domain.Credito_Personal;
+import domain.Credito_Predendario;
+import domain.Prestamo_Hipotecario;
 import java.awt.Image;
 import java.awt.List;
 import java.awt.Panel;
@@ -25,7 +27,9 @@ import org.edisoncor.gui.panel.PanelAvatarChooser;
  * @author Administrador
  */
 public class CreditoConsulta extends javax.swing.JFrame {
-    private  ArrayList<Credito_Personal>lista;
+    private  ArrayList<Credito_Personal>listaPER;
+    private  ArrayList<Credito_Predendario>listaPRE;
+    private  ArrayList<Prestamo_Hipotecario>listaHIPO;
     private int tipoCliente=1;
     /**
      * Creates new form Principal
@@ -66,11 +70,11 @@ public class CreditoConsulta extends javax.swing.JFrame {
         String sql = "{call PA_CONSULTAR_VIEW_consultar_creditos_cliente_fisico()}";
         ResultSet res = sqlServerDB.executeQuery(sql);
         String[] datos = new String[14];
-        lista= new ArrayList();
+        listaPER= new ArrayList();
         while (res.next()){
             Credito_Personal creditoPersonal = new Credito_Personal();
             creditoPersonal.setCod_credto_personal(res.getInt("cod_credto_personal"));
-            lista.add(creditoPersonal);
+            listaPER.add(creditoPersonal);
             
             datos[0]= res.getString("cod_credto_personal");
             datos[1]= res.getString("monto");
@@ -105,11 +109,11 @@ public class CreditoConsulta extends javax.swing.JFrame {
             String sql = "{call PA_CONSULTAR_VIEW_consultar_creditos_cliente_juridico()}";
             ResultSet res = sqlServerDB.executeQuery(sql);
             String[] datos = new String[14];
-            lista= new ArrayList();
+            listaPER= new ArrayList();
             while (res.next()){
                 Credito_Personal creditoPersonal = new Credito_Personal();
                 creditoPersonal.setCod_credto_personal(res.getInt("cod_credto_personal"));
-                lista.add(creditoPersonal);
+                listaPER.add(creditoPersonal);
                     
                 datos[0]= res.getString("cod_credto_personal");
                 datos[1]= res.getString("monto");
@@ -130,8 +134,164 @@ public class CreditoConsulta extends javax.swing.JFrame {
             Logger.getLogger(CreditoConsulta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       
+      
+    /**************/
+        public void tablaCreditoPredendarioClienteFisico() throws SQLException{
+        SQLServerDB sqlServerDB= new SQLServerDB();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("cod_credito_predendario");
+        modelo.addColumn("proposito");
+        modelo.addColumn("moneda");
+        modelo.addColumn("comision");
+        modelo.addColumn("cedula");
+        modelo.addColumn("nombre");
+        modelo.addColumn("apellido_paterno");
+        modelo.addColumn("apellido_materno");
+        modelo.addColumn("id_cuenta");
+        String sql = "{call V_consultar_creditos_predendario_cliente_fisico()}";
+        ResultSet res = sqlServerDB.executeQuery(sql);
+        String[] datos = new String[14];
+        listaPRE= new ArrayList();
+        while (res.next()){
+            Credito_Predendario creditoPredendario = new Credito_Predendario();
+            creditoPredendario.setId_cliente(res.getInt("id_cliente"));
+            listaPRE.add(creditoPredendario);
+            
+            datos[0]= res.getString("cod_credito_predendario");
+            datos[1]= res.getString("proposito");
+            datos[2]= res.getString("moneda");
+            datos[3]= res.getString("comision");
+            datos[4]= res.getString("cedula");
+            datos[5]= res.getString("nombre");
+            datos[6]= res.getString("apellido_paterno");
+            datos[7]= res.getString("apellido_materno");
+            datos[8]= res.getString("id_cuenta");
+           
+            
+            modelo.addRow(datos);
+        }
+        jTable1.setModel(modelo);
+    }
+     
+     public void tablaCreditoPrendarioClienteJuridico(){
+        try {
+            SQLServerDB sqlServerDB= new SQLServerDB();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("cod_credito_predendario");
+            modelo.addColumn("proposito");
+            modelo.addColumn("moneda");
+            modelo.addColumn("comision");
+            modelo.addColumn("ced_juridica");
+            modelo.addColumn("nombre_Empresa");
+            modelo.addColumn("nombre_Representante");
+            modelo.addColumn("apellido1");
+            modelo.addColumn("apellido2");
+            modelo.addColumn("id_cuenta");
+    
+            String sql = "{call V_consultar_creditos_predendario_cliente_juridico()}";
+            ResultSet res = sqlServerDB.executeQuery(sql);
+            String[] datos = new String[14];
+            listaPER= new ArrayList();
+            while (res.next()){
+                Credito_Predendario creditoPredendario = new Credito_Predendario();
+                creditoPredendario.setId_cliente(res.getInt("id_cliente"));
+                listaPRE.add(creditoPredendario);
+                    
+                datos[0]= res.getString("cod_credito_predendario");
+                datos[1]= res.getString("proposito");
+                datos[2]= res.getString("moneda");
+                datos[3]= res.getString("comision");
+                datos[4]= res.getString("ced_juridica");
+                datos[5]= res.getString("nombre_Empresa");
+                datos[6]= res.getString("nombre_Representante");
+                datos[7]= res.getString("apellido1");
+                datos[8]= res.getString("apellido2");
+                datos[9]= res.getString("id_cuenta");
+                    
+                modelo.addRow(datos);
+                
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreditoConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+/************/
+     
+       public void tablaPrestamoHipotecarioClienteFisico() throws SQLException{
+        SQLServerDB sqlServerDB= new SQLServerDB();
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("cod_prestamo_hipotecario");
+        modelo.addColumn("valor_propiedad");
+        modelo.addColumn("cedula");
+        modelo.addColumn("nombre");
+        modelo.addColumn("apellido_paterno");
+        modelo.addColumn("apellido_materno");
+        modelo.addColumn("id_cuenta");
+        String sql = "{call V_consultar_creditos_hipotecarios_cliente_fisico()}";
+        ResultSet res = sqlServerDB.executeQuery(sql);
+        String[] datos = new String[14];
+        listaHIPO= new ArrayList();
+        while (res.next()){
+            Prestamo_Hipotecario prestamoHipotecario = new Prestamo_Hipotecario();
+            prestamoHipotecario.setId_cliente(res.getInt("id_cliente"));
+            listaHIPO.add(prestamoHipotecario);
+            
+            datos[0]= res.getString("cod_prestamo_hipotecario");
+            datos[1]= res.getString("valor_propiedad");
+            datos[2]= res.getString("cedula");
+            datos[3]= res.getString("nombre");
+            datos[4]= res.getString("apellido_paterno");
+            datos[5]= res.getString("apellido_materno");
+            datos[5]= res.getString("id_cuenta");
+            
+           
+            
+            modelo.addRow(datos);
+        }
+        jTable1.setModel(modelo);
+    }
 
+     public void tablaPrestamoHipotecarioClienteJuridico(){
+        try {
+            SQLServerDB sqlServerDB= new SQLServerDB();
+            DefaultTableModel modelo = new DefaultTableModel();
+            modelo.addColumn("cod_prestamo_hipotecario");
+            modelo.addColumn("valor_propiedad");
+            modelo.addColumn("ced_juridica");
+            modelo.addColumn("nombre_Empresa");
+            modelo.addColumn("nombre_Representante");
+            modelo.addColumn("apellido1");
+            modelo.addColumn("apellido2");
+            modelo.addColumn("id_cuenta");
+             
+            String sql = "{call V_consultar_creditos_hipotecarios_cliente_juridico()}";
+            ResultSet res = sqlServerDB.executeQuery(sql);
+            String[] datos = new String[14];
+            listaHIPO= new ArrayList();
+            while (res.next()){
+                Prestamo_Hipotecario prestamoHipotecario = new Prestamo_Hipotecario();
+                prestamoHipotecario.setId_cliente(res.getInt("id_cliente"));
+                listaHIPO.add(prestamoHipotecario);
+                    
+                datos[0]= res.getString("cod_prestamo_hipotecario");
+                datos[1]= res.getString("valor_propiedad");
+                datos[2]= res.getString("ced_juridica");
+                datos[3]= res.getString("nombre_Empresa");
+                datos[4]= res.getString("nombre_Representante");
+                datos[5]= res.getString("apellido1");
+                datos[6]= res.getString("apellido2");
+                datos[7]= res.getString("id_cuenta");
+                
+                    
+                modelo.addRow(datos);
+                
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreditoConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
