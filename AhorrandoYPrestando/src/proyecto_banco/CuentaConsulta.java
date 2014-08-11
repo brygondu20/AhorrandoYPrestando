@@ -39,15 +39,15 @@ public class CuentaConsulta extends javax.swing.JFrame {
     public void tablaCuentaAhorroClienteFisico() throws SQLException{
         SQLServerDB sqlServerDB= new SQLServerDB();
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("id_cuenta");
-        modelo.addColumn("nombre");
-        modelo.addColumn("apellido_paterno");
-        modelo.addColumn("apellido_materno");
-        modelo.addColumn("saldo_actual");
-        modelo.addColumn("moneda");
-        modelo.addColumn("monto_min");
-        modelo.addColumn("cargo_saldo_min");
-        String sql = "{call V_cuenta_ahorros_cliente_fisico()}";
+        modelo.addColumn("id cuenta");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido2");
+        modelo.addColumn("Apellido2");
+        modelo.addColumn("Saldo_actual");
+        modelo.addColumn("Moneda");
+        modelo.addColumn("Promedio diario min");
+        modelo.addColumn("Cargo saldo min");
+        String sql = "{call PA_CONSULTAR_VIEW_cuenta_ahorros_cliente_fisico()}";
         ResultSet res = sqlServerDB.executeQuery(sql);
         String[] datos = new String[14];
         listaA= new ArrayList();
@@ -75,16 +75,16 @@ public class CuentaConsulta extends javax.swing.JFrame {
         try {
             SQLServerDB sqlServerDB= new SQLServerDB();
             DefaultTableModel modelo = new DefaultTableModel();
-            modelo.addColumn("id_cuenta");
-            modelo.addColumn("nombre_Empresa");
-            modelo.addColumn("nombre_representante");
-            modelo.addColumn("apellido1");
-            modelo.addColumn("apellido2");
-            modelo.addColumn("saldo_actual");
-            modelo.addColumn("moneda");
-            modelo.addColumn("monto_min");
-            modelo.addColumn("cargo_saldo_min");
-            String sql = "{call V_cuenta_ahorros_cliente_juridico()}";
+            modelo.addColumn("id cuenta");
+            modelo.addColumn("Empresa");
+            modelo.addColumn("Representante");
+            modelo.addColumn("Apellido1");
+            modelo.addColumn("Apellido2");
+            modelo.addColumn("Saldo actual");
+            modelo.addColumn("Moneda");
+            modelo.addColumn("Promedio diario min");
+            modelo.addColumn("Cargo saldo min");
+            String sql = "{call PA_CONSULTAR_VIEW_cuenta_ahorros_cliente_juridico()}";
             ResultSet res = sqlServerDB.executeQuery(sql);
             String[] datos = new String[14];
             listaA= new ArrayList();
@@ -116,15 +116,15 @@ public class CuentaConsulta extends javax.swing.JFrame {
     public void tablaCuentaCorrienteClienteFisico() throws SQLException{
         SQLServerDB sqlServerDB= new SQLServerDB();
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("id_cuenta");
-        modelo.addColumn("nombre");
-        modelo.addColumn("apellido_paterno");
-        modelo.addColumn("apellido_materno");
-        modelo.addColumn("saldo_actual");
-        modelo.addColumn("moneda");
-        modelo.addColumn("promedio_diario_min");
-        modelo.addColumn("cargo_saldo_min");
-        String sql = "{call V_cuenta_corriente_cliente_fisico()}";
+        modelo.addColumn("id cuenta");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido2");
+        modelo.addColumn("Apellido2");
+        modelo.addColumn("Saldo_actual");
+        modelo.addColumn("Moneda");
+        modelo.addColumn("Promedio diario min");
+        modelo.addColumn("Cargo saldo min");
+        String sql = "{call PA_CONSULTAR_VIEW_cuenta_corriente_cliente_fisico()}";
         ResultSet res = sqlServerDB.executeQuery(sql);
         String[] datos = new String[14];
         listaC= new ArrayList();
@@ -152,16 +152,16 @@ public class CuentaConsulta extends javax.swing.JFrame {
         try {
             SQLServerDB sqlServerDB= new SQLServerDB();
             DefaultTableModel modelo = new DefaultTableModel();
-            modelo.addColumn("id_cuenta");
-            modelo.addColumn("nombre_Empresa");
-            modelo.addColumn("nombre_representante");
-            modelo.addColumn("apellido1");
-            modelo.addColumn("apellido2");
-            modelo.addColumn("saldo_actual");
-            modelo.addColumn("moneda");
-            modelo.addColumn("promedio_diario_min");
-            modelo.addColumn("cargo_saldo_min");
-            String sql = "{call V_cuenta_corriente_cliente_juridico()}";
+            modelo.addColumn("id cuenta");
+            modelo.addColumn("Empresa");
+            modelo.addColumn("Representante");
+            modelo.addColumn("Apellido1");
+            modelo.addColumn("Apellido2");
+            modelo.addColumn("Saldo actual");
+            modelo.addColumn("Moneda");
+            modelo.addColumn("Promedio diario min");
+            modelo.addColumn("Cargo saldo min");
+            String sql = "{call PA_CONSULTAR_VIEW_cuenta_corriente_cliente_juridico()}";
             ResultSet res = sqlServerDB.executeQuery(sql);
             String[] datos = new String[14];
             listaC= new ArrayList();
@@ -237,7 +237,7 @@ public class CuentaConsulta extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        panelReflect1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 700, 340));
+        panelReflect1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 700, 340));
 
         jButton3.setText("Consultar");
         panelReflect1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, -1, -1));

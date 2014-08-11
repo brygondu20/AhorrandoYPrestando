@@ -26,33 +26,50 @@ import org.edisoncor.gui.panel.PanelAvatarChooser;
  */
 public class CreditoConsulta extends javax.swing.JFrame {
     private  ArrayList<Credito_Personal>lista;
+    private int tipoCliente=1;
     /**
      * Creates new form Principal
      */
     public CreditoConsulta() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        try {
+            cargatTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(CreditoConsulta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    
+    public void cargatTabla() throws SQLException{
+        if(tipoCliente==1){
+            tablaCreditoClienteFisico();
+        }else{
+            tablaCreditoClienteJuridico();
+        }
+    }
+    
+    
     
     public void tablaCreditoClienteFisico() throws SQLException{
         SQLServerDB sqlServerDB= new SQLServerDB();
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("cod_credto_personal");
-        modelo.addColumn("monto");
-        modelo.addColumn("moneda");
-        modelo.addColumn("cedula");
-        modelo.addColumn("nombre");
-        modelo.addColumn("apellido_paterno");
-        modelo.addColumn("apellido_materno");
-        modelo.addColumn("id_cuenta");
-        String sql = "{call V_consultar_creditos_cliente_fisico()}";
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Monto");
+        modelo.addColumn("Moneda");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido1");
+        modelo.addColumn("Apellido2");
+        modelo.addColumn("id cuenta");
+        String sql = "{call PA_CONSULTAR_VIEW_consultar_creditos_cliente_fisico()}";
         ResultSet res = sqlServerDB.executeQuery(sql);
         String[] datos = new String[14];
         lista= new ArrayList();
         while (res.next()){
             Credito_Personal creditoPersonal = new Credito_Personal();
-            creditoPersonal.setId_cliente(res.getInt("id_cliente"));
+            creditoPersonal.setCod_credto_personal(res.getInt("cod_credto_personal"));
             lista.add(creditoPersonal);
             
             datos[0]= res.getString("cod_credto_personal");
@@ -75,23 +92,23 @@ public class CreditoConsulta extends javax.swing.JFrame {
         try {
             SQLServerDB sqlServerDB= new SQLServerDB();
             DefaultTableModel modelo = new DefaultTableModel();
-            modelo.addColumn("cod_credto_personal");
-            modelo.addColumn("monto");
-            modelo.addColumn("moneda");
-            modelo.addColumn("ced_juridica");
-            modelo.addColumn("nombre_Empresa");
-            modelo.addColumn("nombre_Representante");
-            modelo.addColumn("apellido1");
-            modelo.addColumn("apellido2");
-            modelo.addColumn("id_cuenta");
+            modelo.addColumn("Codigo");
+            modelo.addColumn("Monto");
+            modelo.addColumn("Moneda");
+            modelo.addColumn("Ced_juridica");
+            modelo.addColumn("Empresa");
+            modelo.addColumn("Representante");
+            modelo.addColumn("Apellido1");
+            modelo.addColumn("Apellido2");
+            modelo.addColumn("id cuenta");
     
-            String sql = "{call V_consultar_creditos_cliente_juridico()}";
+            String sql = "{call PA_CONSULTAR_VIEW_consultar_creditos_cliente_juridico()}";
             ResultSet res = sqlServerDB.executeQuery(sql);
             String[] datos = new String[14];
             lista= new ArrayList();
             while (res.next()){
                 Credito_Personal creditoPersonal = new Credito_Personal();
-                creditoPersonal.setId_cliente(res.getInt("id_cliente"));
+                creditoPersonal.setCod_credto_personal(res.getInt("cod_credto_personal"));
                 lista.add(creditoPersonal);
                     
                 datos[0]= res.getString("cod_credto_personal");
@@ -138,6 +155,8 @@ public class CreditoConsulta extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         buttonAeroRight1 = new org.edisoncor.gui.button.ButtonAeroRight();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxTipoCliente = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -173,21 +192,21 @@ public class CreditoConsulta extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Id Cliente:");
-        panelReflect1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, 20));
+        jLabel1.setText("tipo cliente");
+        panelReflect1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, 20));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        panelReflect1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 70, 20));
+        panelReflect1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 70, 20));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Cedula:");
-        panelReflect1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, 20));
-        panelReflect1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 70, -1));
+        panelReflect1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, 20));
+        panelReflect1.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 70, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -202,6 +221,19 @@ public class CreditoConsulta extends javax.swing.JFrame {
             }
         });
         panelReflect1.add(buttonAeroRight1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Id Cliente:");
+        panelReflect1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, -1, 20));
+
+        jComboBoxTipoCliente.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "fisico", "juridico" }));
+        jComboBoxTipoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTipoClienteActionPerformed(evt);
+            }
+        });
+        panelReflect1.add(jComboBoxTipoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
 
         panelNice2.add(panelReflect1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 910, 600));
 
@@ -220,6 +252,20 @@ public class CreditoConsulta extends javax.swing.JFrame {
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonAeroRight1ActionPerformed
+
+    private void jComboBoxTipoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoClienteActionPerformed
+        if(jComboBoxTipoCliente.getSelectedIndex()==0){
+            try {
+                tipoCliente=1;
+                tablaCreditoClienteFisico();
+            } catch (SQLException ex) {
+                Logger.getLogger(ClienteConsulta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            tipoCliente=2;
+            tablaCreditoClienteJuridico();
+        }
+    }//GEN-LAST:event_jComboBoxTipoClienteActionPerformed
     
     
     /**
@@ -260,7 +306,9 @@ public class CreditoConsulta extends javax.swing.JFrame {
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox jComboBoxTipoCliente;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
