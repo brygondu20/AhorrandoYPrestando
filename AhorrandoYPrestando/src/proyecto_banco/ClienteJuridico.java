@@ -4,6 +4,7 @@
  */
 package proyecto_banco;
 
+import business.ClientesBusiness;
 import business.TelefonoBusiness;
 import data.ClientesDAO;
 import data.DireccionesDAO;
@@ -102,7 +103,7 @@ public class ClienteJuridico extends javax.swing.JFrame {
         txtEmpresa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtApellido2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -144,8 +145,13 @@ public class ClienteJuridico extends javax.swing.JFrame {
         panelCurves1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, 20));
         panelCurves1.add(txtApellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 100, -1));
 
-        jButton4.setText("Actualizar");
-        panelCurves1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, -1, -1));
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        panelCurves1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, -1, -1));
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,6 +195,12 @@ public class ClienteJuridico extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Primer Apellido:");
         panelCurves1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, 20));
+
+        txtCedulaJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaJuridicaActionPerformed(evt);
+            }
+        });
         panelCurves1.add(txtCedulaJuridica, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, 80, -1));
         panelCurves1.add(cel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 60, -1));
         panelCurves1.add(tel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 60, -1));
@@ -331,6 +343,58 @@ public class ClienteJuridico extends javax.swing.JFrame {
         }    
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    private void txtCedulaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaJuridicaActionPerformed
+        ClientesDAO cli = new ClientesDAO();
+        
+        Cliente_Juridico cliente_Juridico = new Cliente_Juridico();
+        cliente_Juridico.setId_cliente(Integer.parseInt(txtCedulaJuridica.getText()));
+        
+        
+        try{
+            cli.obtenerDatosClienteJuridico(cliente_Juridico);
+            txtEmpresa.setText(cliente_Juridico.getNombre_Empresa().trim());
+            txtNombre.setText(cliente_Juridico.getNombre_Representante().trim());
+            txtApellido1.setText(cliente_Juridico.getApellido1().trim());
+            txtApellido2.setText(cliente_Juridico.getApellido2().trim());
+            
+            //tel1.setText(cliente_Juridico.getCod_telefonos().trim());
+            
+            codDirrecion = cliente_Juridico.getCodDireccion();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteFisico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtCedulaJuridicaActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        ClientesBusiness clienteBusniess = new ClientesBusiness();
+        
+        Cliente_Juridico cliente_Juridico = new Cliente_Juridico();
+        
+        cliente_Juridico.setCed_juridica(Integer.parseInt(txtCedulaJuridica.getText()));
+        cliente_Juridico.setNombre_Empresa(txtEmpresa.getText());
+        cliente_Juridico.setNombre_Representante(txtNombre.getText());
+        cliente_Juridico.setApellido1(txtApellido1.getText());
+        cliente_Juridico.setApellido2(txtApellido2.getText());
+        cliente_Juridico.setCodDireccion(codDirrecion);
+        
+        TelefonoBusiness telefonoBusiness = new TelefonoBusiness();
+            
+            Telefonos telefonos= new Telefonos();
+            telefonos.setTelefono1(tel1.getText());
+            telefonos.setTelefono2(tel2.getText());
+            telefonos.setTelefono3(tel3.getText());
+            telefonos.setCelular1(cel1.getText());
+            telefonos.setCelular2(cel2.getText());
+        try {
+            telefonoBusiness.agregarTelefonos(telefonos);
+            cliente_Juridico.setCod_telefono(telefonos.getCod_telefono());
+            clienteBusniess.actualizarClienteJuridico(cliente_Juridico);
+            JOptionPane.showMessageDialog(panelCurves1, "El cliente ha sido actualizado correctemente ");
+        } catch (Exception ex) {
+            Logger.getLogger(ClienteJuridico.class.getName()).log(Level.SEVERE, null, ex);
+    }//GEN-LAST:event_btnActualizarActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
@@ -366,11 +430,11 @@ public class ClienteJuridico extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private org.edisoncor.gui.button.ButtonAeroRight buttonAeroRight1;
     private javax.swing.JTextField cel1;
     private javax.swing.JTextField cel2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jComboBoxCanton;
     private javax.swing.JComboBox jComboBoxDistrito;
     private javax.swing.JComboBox jComboBoxProvincias;

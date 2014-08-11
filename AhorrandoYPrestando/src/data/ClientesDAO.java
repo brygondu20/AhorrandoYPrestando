@@ -136,9 +136,9 @@ public class ClientesDAO {
         bd.closeExecuteQuery();
      }
      
-     public void borrarCliente_Juridico(Cliente_Juridico clienteJuridico) throws SQLException{
+     public void borrarCliente_Juridico(int cedula) throws SQLException{
         bd = new SQLServerDB();
-        String sql="{call PA_CONSULTAR_ELIMINAR_Cliente_Juridico ("+clienteJuridico.getCed_juridica()+"')}";  
+        String sql="{call PA_ELIMINAR_Cliente_Juridico ("+cedula+")}";  
         bd.callStatement(sql);
         bd.closeExecuteQuery();
      }
