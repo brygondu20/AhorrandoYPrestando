@@ -43,7 +43,7 @@ public class CuentasBusiness {
     }
     
     public void agregarCuentaAhorro(Cuenta_Ahorros cuenta_Ahorros)throws SQLException, Exception{
-        cuenta_Ahorros.setId_cuenta(cuentasDAO.ultimoIdCorriente());
+        cuenta_Ahorros.setId_cuenta(cuentasDAO.ultimoIdAhorros());
         cuentasDAO.agregarCuenta_ahorros(cuenta_Ahorros);
     }
     

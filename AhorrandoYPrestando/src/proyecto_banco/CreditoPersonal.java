@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,6 +46,12 @@ public class CreditoPersonal extends javax.swing.JFrame {
         jComboBox1.setModel(modelo);
         
     }
+    
+    public void limpiar() {
+        txtIdCliente.setText("");
+        txtMonto.setText("");
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,7 +141,6 @@ public class CreditoPersonal extends javax.swing.JFrame {
         jLabel3.setText("Id Cliente:");
         panelCurves1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         panelCurves1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, 100, -1));
 
         panelNice5.add(panelCurves1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 450));
@@ -180,8 +186,13 @@ public class CreditoPersonal extends javax.swing.JFrame {
             int cuenta = (int) jComboBox1.getSelectedItem();
             creditoPersonal.setId_cuenta(cuenta);
             creditoPersonal.setMonto(Integer.parseInt(txtMonto.getText()));
+            creditoPersonal.setId_cliente(Integer.parseInt(txtIdCliente.getText()));
             
             creditosBusiness.agregarCreditoPersonal(creditoPersonal);
+            
+            JOptionPane.showMessageDialog(panelCurves1, "El credito ha sido agregado correctemente ");
+            
+            limpiar();
             
         } catch (SQLException ex) {
             Logger.getLogger(CreditoPersonal.class.getName()).log(Level.SEVERE, null, ex);

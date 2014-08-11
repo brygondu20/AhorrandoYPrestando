@@ -34,10 +34,9 @@ public class CreditosDAO {
         bd.closeExecuteQuery();
      }       
     
-   public void agregarCredito_predendario (Credito_Predendario  creditopredendario) throws SQLException{
+   public void agregarCredito_predendario (Credito_Predendario  credito_Predendario) throws SQLException{
         bd = new SQLServerDB();
-        String sql="{call    PA_CREDITO_PRENDEDARIO_INSERTAR ("+creditopredendario.getMoneda()+"','"+creditopredendario.getProposito()+"','"
-               +creditopredendario.getComision()+"','" +creditopredendario.getId_cliente()+",'"+creditopredendario.getId_cuenta()+"')}";  
+        String sql="{call PA_CREDITO_PRENDEDARIO_INSERTAR ("+credito_Predendario.getMoneda()+","+credito_Predendario.getProposito()+","+credito_Predendario.getComision()+","+credito_Predendario.getId_cliente()+","+credito_Predendario.getId_cuenta()+")}";  
         bd.callStatement(sql);
         bd.closeExecuteQuery();
      }       
